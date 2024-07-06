@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="UTF-8" />
+		<title>View Files by Course</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='styles.css') }}"
+		/>
+	</head>
+
+	<body>
+		<nav>
+			<ul>
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="{{ url_for('upload_file') }}">Upload File</a></li>
+				<li><a href="{{ url_for('search') }}">Search Files</a></li>
+				<li>
+					<a href="{{ url_for('view_by_course') }}">View Files by Course</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="container">
+			<h1>View Files by Course</h1>
+			{% for course, files in files_by_course.items() %}
+			<div class="course-dropdown">
+				<h2 class="dropdown-toggle">{{ course }}</h2>
+				<div class="dropdown-content">
+					<table>
+						<thead>
+							<tr>
+								<th>File</th>
+								<th>Professors</th>
+								<th>File Type</th>
+								<th>Year</th>
+								<th>Semester</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for file in files %}
+							<tr>
+								<td>
+									<a
+										href="https://drive.google.com/uc?export=download&id={{ file[7] }}"
+										>{{ file[1] }}</a
+									>
+								</td>
+								<td>{{ file[3] }}</td>
+								<td>{{ file[6] }}</td>
+								<td>{{ file[4] }}</td>
+								<td>{{ file[5] }}</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="footer">
+			<p>&copy; 2024 AUS Archive</p>
+		</div>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				var toggles = document.querySelectorAll(".dropdown-toggle");
+
+				toggles.forEach(function (toggle) {
+					toggle.addEventListener("click", function () {
+						var content = this.nextElementSibling;
+						if (content.style.display === "block") {
+							content.style.display = "none";
+							this.innerHTML = this.innerHTML.replace(" \x25B2", " \x25BC");
+						} else {
+							content.style.display = "block";
+							this.innerHTML = this.innerHTML.replace(" \x25B2", " \x25B2");
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
