@@ -110,7 +110,10 @@
 					{% for file in files %}
 					<tr>
 						<td>
-							<a href="{{ file[8] }}">{{ file[1] }}</a>
+							<a
+								href="https://drive.google.com/uc?export=download&id={{ file[7] }}"
+								>{{ file[1] }}</a
+							>
 						</td>
 						<td>{{ file[3] }}</td>
 						<td>{{ file[6] }}</td>
