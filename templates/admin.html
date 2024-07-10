@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Admin Page</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='styles.css') }}"
+		/>
+	</head>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-
-<body>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('upload_file') }}">Upload File</a></li>
-            <li><a href="{{ url_for('search') }}">Search Files</a></li>
-            <li><a href="{{ url_for('view_by_course') }}">View Files by Course</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>Admin Page</h1>
-        <form action="{{ url_for('admin') }}" method="post">
-            <label for="course">Add Course:</label>
-            <input type="text" name="course" id="course">
-            <input type="submit" value="Add Course">
-        </form>
-        <form action="{{ url_for('admin') }}" method="post">
-            <label for="prof">Add Professor:</label>
-            <input type="text" name="prof" id="prof">
-            <input type="submit" value="Add Professor">
-        </form>
-        <form action="{{ url_for('reset_db') }}" method="post">
-            <input type="submit" value="Reset Database">
-        </form>
-        <h2>Suggestions</h2>
-        <ul>
-            {% for suggestion in suggestions %}
-            <li>{{ suggestion }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="footer">
-        <p>&copy; 2024 AUS Archive</p>
-    </div>
-
-</body>
-
+	<body>
+		<nav>
+			<ul>
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="{{ url_for('upload_file') }}">Upload File</a></li>
+				<li><a href="{{ url_for('search') }}">Search Files</a></li>
+				<li>
+					<a href="{{ url_for('view_by_course') }}">View Files by Course</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="container">
+			<h1>Admin Page</h1>
+			<form action="{{ url_for('admin') }}" method="post">
+				<label for="course">Add Course:</label>
+				<input type="text" name="course" id="course" />
+				<input type="submit" value="Add Course" />
+			</form>
+			<form action="{{ url_for('admin') }}" method="post">
+				<label for="prof">Add Professor:</label>
+				<input type="text" name="prof" id="prof" />
+				<input type="submit" value="Add Professor" />
+			</form>
+			<form action="{{ url_for('reset_db') }}" method="post">
+				<input type="submit" value="Reset Database" />
+			</form>
+			<h2>Suggestions</h2>
+			<ul>
+				{% for suggestion in suggestions %}
+				<li>{{ suggestion }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+		<div class="footer">
+			<p>&copy; 2024 AUS Archive</p>
+		</div>
+	</body>
 </html>

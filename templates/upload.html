@@ -1,101 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="UTF-8" />
+		<title>Upload File</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='styles.css') }}"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"
+			rel="stylesheet"
+		/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$("#course").select2();
+				$("#profs").select2({
+					placeholder: "Select Professors",
+					allowClear: true,
+					// This option ensures the disabled placeholder option doesn't get selected
+					templateSelection: function (data, container) {
+						if (data.id === "") {
+							return "Select Professors";
+						}
+						return data.text;
+					},
+				});
+				$("#file_type").select2();
+				$("#semester").select2();
+			});
+		</script>
+		<script>
+			document.querySelector("form").onsubmit = function () {
+				var profsSelect = document.getElementById("profs");
+				var selectedProfs = Array.from(profsSelect.options).some(
+					(option) => option.selected && option.value
+				);
+				if (!selectedProfs) {
+					alert("Please select at least one professor.");
+					return false;
+				}
+				return true;
+			};
+		</script>
+	</head>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <title>Upload File</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#course').select2();
-            $('#profs').select2({
-                placeholder: 'Select Professors',
-                allowClear: true,
-                // This option ensures the disabled placeholder option doesn't get selected
-                templateSelection: function (data, container) {
-                    if (data.id === '') {
-                        return 'Select Professors';
-                    }
-                    return data.text;
-                }
-            });
-            $('#file_type').select2();
-            $('#semester').select2();
-        });
-    </script>
-    <script>
-        document.querySelector('form').onsubmit = function () {
-            var profsSelect = document.getElementById('profs');
-            var selectedProfs = Array.from(profsSelect.options).some(option => option.selected && option.value);
-            if (!selectedProfs) {
-                alert('Please select at least one professor.');
-                return false;
-            }
-            return true;
-        };
-    </script>
+	<body>
+		<nav>
+			<ul>
+				<li><a href="{{ url_for('index') }}">Home</a></li>
+				<li><a href="{{ url_for('upload_file') }}">Upload File</a></li>
+				<li><a href="{{ url_for('search') }}">Search Files</a></li>
+				<li>
+					<a href="{{ url_for('view_by_course') }}">View Files by Course</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="container">
+			<h1>Upload File</h1>
+			<form
+				action="{{ url_for('upload_file') }}"
+				method="post"
+				enctype="multipart/form-data"
+			>
+				<label for="course">Course:</label>
+				<select name="course" id="course" required>
+					<option value="" selected>Select the Course</option>
+					{% for course in courses %}
+					<option value="{{ course }}">{{ course }}</option>
+					{% endfor %}</select
+				><br />
 
-</head>
+				<label for="profs">Professors:</label>
+				<select name="profs" id="profs" multiple required>
+					<option value="">Select the Professor(s)</option>
+					{% for professor in professors %}
+					<option value="{{ professor }}">{{ professor }}</option>
+					{% endfor %}</select
+				><br />
 
-<body>
-    <nav>
-        <ul>
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('upload_file') }}">Upload File</a></li>
-            <li><a href="{{ url_for('search') }}">Search Files</a></li>
-            <li><a href="{{ url_for('view_by_course') }}">View Files by Course</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>Upload File</h1>
-        <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data">
-            <label for="course">Course:</label>
-            <select name="course" id="course" required>
-                <option value="" selected>Select the Course</option>
-                {% for course in courses %}
-                <option value="{{ course }}">{{ course }}</option>
-                {% endfor %}
-            </select><br>
+				<label for="file_type">File Type:</label>
+				<select name="file_type" id="file_type" required>
+					<option value="" selected>Select the Type of Document</option>
+					{% for file_type in file_types %}
+					<option value="{{ file_type }}">{{ file_type }}</option>
+					{% endfor %}</select
+				><br />
 
-            <label for="profs">Professors:</label>
-            <select name="profs" id="profs" multiple required>
-                <option value="">Select the Professor(s)</option>
-                {% for professor in professors %}
-                <option value="{{ professor }}">{{ professor }}</option>
-                {% endfor %}
-            </select><br>
+				<label for="year">Year:</label>
+				<input
+					type="number"
+					name="year"
+					id="year"
+					min="1997"
+					max="2100"
+					placeholder="Enter the Year"
+				/><br />
 
-            <label for="file_type">File Type:</label>
-            <select name="file_type" id="file_type" required>
-                <option value="" selected>Select the Type of Document</option>
-                {% for file_type in file_types %}
-                <option value="{{ file_type }}">{{ file_type }}</option>
-                {% endfor %}
-            </select><br>
+				<label for="semester">Semester:</label>
+				<select name="semester" id="semester">
+					<option value="Unkown" disabled selected>Select the Semester</option>
+					{% for semester in semesters %}
+					<option value="{{ semester }}">{{ semester }}</option>
+					{% endfor %}</select
+				><br />
 
-            <label for="year">Year:</label>
-            <input type="number" name="year" id="year" min="1997" max="2100" placeholder="Enter the Year"><br>
-
-            <label for="semester">Semester:</label>
-            <select name="semester" id="semester">
-                <option value="Unkown" disabled selected>Select the Semester</option>
-                {% for semester in semesters %}
-                <option value="{{ semester }}">{{ semester }}</option>
-                {% endfor %}
-            </select><br>
-
-            <label for="file">File:</label>
-            <input type="file" name="file" id="file" required><br>
-            <input type="submit" value="Upload">
-        </form>
-    </div>
-    <div class="footer">
-        <p>&copy; 2024 AUS Archive</p>
-    </div>
-</body>
-
+				<label for="file">File:</label>
+				<input type="file" name="file" id="file" required /><br />
+				<input type="submit" value="Upload" />
+			</form>
+		</div>
+		<div class="footer">
+			<p>&copy; 2024 AUS Archive</p>
+		</div>
+	</body>
 </html>

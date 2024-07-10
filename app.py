@@ -8,6 +8,7 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from googleapiclient.http import MediaIoBaseUpload
 from io import BytesIO
+from psycopg2 import pool
 
 app = Flask(__name__)
 
@@ -16,18 +17,26 @@ load_dotenv("lock.env")
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.secret_key = os.getenv('SECRET_KEY')
 
-# Load Google related environment variables
+# GOOGLE DRIVE API VARIABLES
 SCOPES = ['https://www.googleapis.com/auth/drive']
 SERVICE_ACCOUNT_FILE = 'AUS-ARCHIVER.json'
 PARENT_FOLDER_ID = "1n_JeiBFdlxebfC6itq2VLe_dpGF272ya"
 
+
+# NEON (Postgres) SIDE VARIABLES
+CONNECTION_STRING = os.getenv('DATABASE_URL')
+CONNECTION_POOL = pool.SimpleConnectionPool(1, 20, CONNECTION_STRING)
+
+if CONNECTION_POOL:
+    print('Connection pool created successfully')
+
 def init_db():
-    with sqlite3.connect('database.db') as conn:
+    with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()
         # File Metadata Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS files (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 filename TEXT NOT NULL,
                 course TEXT NOT NULL,
                 profs TEXT NOT NULL,
@@ -41,42 +50,42 @@ def init_db():
         # Course Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS courses (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL
             )
         ''')
         # Professors Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS professors (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL
             )
         ''')
         # File Types Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS file_types (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL
             )
         ''')
         # Years Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS years (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 name INTEGER NOT NULL  -- Changed from TEXT to INTEGER
             )
         ''')
         # Semesters Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS semesters (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 name TEXT NOT NULL
             )
         ''')
         # Suggestions Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS suggestions (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                id SERIAL PRIMARY KEY,
                 suggestion TEXT NOT NULL
             )
         ''')
@@ -94,7 +103,7 @@ def init_db():
                         if name:  
                             if name not in done_name: 
                                 done_name.append(name)
-                                cursor.execute('INSERT INTO professors (name) VALUES (?)', (name,))
+                                cursor.execute('INSERT INTO professors (name) VALUES (%s)', (name,))
 
         cursor.execute('SELECT COUNT(*) FROM courses')
         count = cursor.fetchone()[0]
@@ -109,21 +118,21 @@ def init_db():
                         if name:  
                             if name not in done_name: 
                                 done_name.append(name)
-                                cursor.execute('INSERT INTO courses (name) VALUES (?)', (name,))
+                                cursor.execute('INSERT INTO courses (name) VALUES (%s)', (name,))
         
         cursor.execute('SELECT COUNT(*) FROM semesters') 
         count = cursor.fetchone()[0]
         if count == 0:
             files = ['Fall', 'Spring', 'Summer', 'Unkown']
             for name in files:
-                cursor.execute('INSERT INTO semesters (name) VALUES (?)', (name,))
+                cursor.execute('INSERT INTO semesters (name) VALUES (%s)', (name,))
         
         cursor.execute('SELECT COUNT(*) FROM file_types')
         count = cursor.fetchone()[0]
         if count == 0:
             files = ['Midterm 1', 'Midterm 2', 'Midterm 3', 'Final', 'Quiz', 'Assignment', 'Notes', 'Syllabus', 'Book', 'Book Answer Key','Others']
             for name in files:
-                cursor.execute('INSERT INTO file_types (name) VALUES (?)', (name,))
+                cursor.execute('INSERT INTO file_types (name) VALUES (%s)', (name,))
 
 init_db()
 
@@ -175,11 +184,11 @@ def upload_file():
         file_ID = google_upload(file, filename)
         file_link = google_retrieve_links(file_ID)
         
-        with sqlite3.connect('database.db') as conn:
+        with CONNECTION_POOL.getconn() as conn:
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO files (filename, course, profs, year, semester, file_type, file_ID, file_link) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
             ''', (filename, course, profs, year, semester, file_type, file_ID, file_link))
             conn.commit()
         
@@ -191,7 +200,7 @@ def upload_file():
     file_types = get_unique_values('file_types')
     return render_template('upload.html', courses=courses, professors=professors, semesters=semesters, file_types=file_types)
 
-# FIXME - Unable to download the file, it reroutes me back to search page
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     files = []
@@ -206,22 +215,22 @@ def search():
         search_values = []
         
         if course:
-            query += ' AND course=?'
+            query += ' AND course=%s'
             search_values.append(course)
         if profs:
-            query += ' AND (' + ' OR '.join(['profs LIKE ?'] * len(profs)) + ')'
+            query += ' AND (' + ' OR '.join(['profs LIKE %s'] * len(profs)) + ')'
             search_values.extend([f"%{prof}%" for prof in profs])
         if year:
-            query += ' AND year=?'
+            query += ' AND year=%s'
             search_values.append(year)
         if semester:
-            query += ' AND semester=?'
+            query += ' AND semester=%s'
             search_values.append(semester)
         if file_type:
-            query += ' AND file_type=?'
+            query += ' AND file_type=%s'
             search_values.append(file_type)
 
-        with sqlite3.connect('database.db') as conn:
+        with CONNECTION_POOL.getconn() as conn:
             cursor = conn.cursor()
             cursor.execute(query, search_values)
             files = cursor.fetchall()
@@ -235,7 +244,7 @@ def search():
 @app.route('/view_by_course')
 def view_by_course():
     files_by_course = {}
-    with sqlite3.connect('database.db') as conn:
+    with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT * FROM files')
         files = cursor.fetchall()
@@ -270,16 +279,16 @@ def admin():
     semester = request.form.get('semester')
     suggestion = request.form.get('suggestion')
     
-    with sqlite3.connect('database.db') as conn:
+    with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()
         if course:
-            cursor.execute('INSERT INTO courses (name) VALUES (?)', (course,))
+            cursor.execute('INSERT INTO courses (name) VALUES (%s)', (course,))
         if prof:
-            cursor.execute('INSERT INTO professors (name) VALUES (?)', (prof,))
+            cursor.execute('INSERT INTO professors (name) VALUES (%s)', (prof,))
         if semester:
-            cursor.execute('INSERT INTO semesters (name) VALUES (?)', (semester,))
+            cursor.execute('INSERT INTO semesters (name) VALUES (%s)', (semester,))
         if suggestion:
-            cursor.execute('INSERT INTO suggestions (suggestion) VALUES (?)', (suggestion,))
+            cursor.execute('INSERT INTO suggestions (suggestion) VALUES (%s)', (suggestion,))
         conn.commit()
 
     courses = get_unique_values('courses')
@@ -295,14 +304,14 @@ def admin():
 def submit_suggestion():
     suggestion = request.form.get('suggestion')
     if suggestion:
-        with sqlite3.connect('database.db') as conn:
+        with CONNECTION_POOL.getconn() as conn:
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO suggestions (suggestion) VALUES (?)', (suggestion,))
+            cursor.execute('INSERT INTO suggestions (suggestion) VALUES (%s)', (suggestion,))
             conn.commit()
     return redirect(url_for('index'))
 
 def get_unique_values(table):
-    with sqlite3.connect('database.db') as conn:
+    with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()
         query = f'SELECT name FROM {table}'
         cursor.execute(query)
@@ -310,7 +319,7 @@ def get_unique_values(table):
     return values
 
 def get_all_suggestions():
-    with sqlite3.connect('database.db') as conn:
+    with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()
         cursor.execute('SELECT suggestion FROM suggestions')
         suggestions = [row[0] for row in cursor.fetchall()]
@@ -323,7 +332,7 @@ def reset_db():
     backup_name = 'database_backup_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.db'
     shutil.copy2('database.db', backup_name)
 
-    with sqlite3.connect('database.db') as conn:
+    with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()
         cursor.execute('DROP TABLE IF EXISTS files')
         cursor.execute('DROP TABLE IF EXISTS professors')
