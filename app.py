@@ -24,7 +24,7 @@ PARENT_FOLDER_ID = "1n_JeiBFdlxebfC6itq2VLe_dpGF272ya"
 
 # NEON (Postgres) SIDE VARIABLES
 CONNECTION_STRING = os.getenv('DATABASE_URL')
-CONNECTION_POOL = pool.SimpleConnectionPool(1, 20, CONNECTION_STRING)
+CONNECTION_POOL = pool.SimpleConnectionPool(1, 250, CONNECTION_STRING)
 
 if CONNECTION_POOL:
     print('Connection pool created successfully')
