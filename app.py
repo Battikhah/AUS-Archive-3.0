@@ -394,5 +394,9 @@ def get_all_suggestions():
 def login_page():
     return render_template("login.html")
 
+@app.route('/ads.txt')
+def ads():
+    return render_template('ads.txt')
+
 if __name__ == '__main__':
     app.run(debug=True)
