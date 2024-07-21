@@ -1,26 +1,86 @@
 import os
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, abort, session
-import shutil
-import datetime
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
 from googleapiclient.http import MediaIoBaseUpload
 from io import BytesIO
 from psycopg2 import pool
+import pathlib
+from google_auth_oauthlib.flow import Flow
+from google.auth.transport import requests
+from google.oauth2 import id_token
+from pip._vendor import cachecontrol
+import google.auth.transport.requests
+import requests
+
+
 
 app = Flask(__name__)
 
 load_dotenv("lock.env")
 
 app.config['UPLOAD_FOLDER'] = 'uploads'
-app.secret_key = os.getenv('SECRET_KEY')
+app.secret_key = os.urandom(24)
 
 # GOOGLE DRIVE API VARIABLES
 SCOPES = ['https://www.googleapis.com/auth/drive']
 SERVICE_ACCOUNT_FILE = 'AUS-ARCHIVER.json'
 PARENT_FOLDER_ID = "1n_JeiBFdlxebfC6itq2VLe_dpGF272ya"
 
+# GOOGLE LOG IN VARIABLES
+
+######
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+######
+
+GOOGLE_CLIENT_ID = "580529357076-s9n138qr90qbbjuuqso3d92o8vljedpm.apps.googleusercontent.com"
+client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
+flow = Flow.from_client_secrets_file(
+    client_secrets_file=client_secrets_file,
+    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
+    redirect_uri="http://127.0.0.1:5000/callback"
+)
+
+def login_is_required(function):
+    def wrapper(*args, **kwargs):
+        if "google_id" not in session:
+            return redirect(url_for("login"))
+        else:
+            return function()
+    return wrapper
+
+@app.route("/login")
+def login():
+    print("Login")
+    authorization_url, state = flow.authorization_url()
+    session["state"] = state
+    return redirect(authorization_url)
+
+
+@app.route("/callback")
+def callback():
+    print("Callback")
+    flow.fetch_token(authorization_response=request.url)
+
+    if not session["state"] == request.args["state"]:
+        abort(500)  # State does not match!
+
+    credentials = flow.credentials
+    request_session = requests.session()
+    cached_session = cachecontrol.CacheControl(request_session)
+    token_request = google.auth.transport.requests.Request(session=cached_session)
+
+    id_info = id_token.verify_oauth2_token(
+        id_token=credentials._id_token,
+        request=token_request,
+        audience=GOOGLE_CLIENT_ID
+    )
+
+    session["google_id"] = id_info.get("sub")
+    session["name"] = id_info.get("name")
+    session["email"] = id_info.get("email")
+    return redirect(url_for("upload_file"))
 
 # NEON (Postgres) SIDE VARIABLES
 CONNECTION_STRING = os.getenv('DATABASE_URL')
@@ -43,7 +103,8 @@ def init_db():
                 semester TEXT NOT NULL,
                 file_type TEXT NOT NULL,
                 file_ID TEXT NOT NULL,
-                file_link TEXT NOT NULL
+                file_link TEXT NOT NULL,
+                uploaded_by TEXT NOT NULL
             )
         ''')
         # Course Table
@@ -171,33 +232,37 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
-    if request.method == 'POST':
-        course = request.form['course']
-        profs = ', '.join(request.form.getlist('profs'))
-        file_type = request.form['file_type']
-        year = request.form['year']
-        semester = request.form['semester']
-        file = request.files['file']
-        filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}{os.path.splitext(file.filename)[1]}"
+    if not session.get('google_id'):
+        return redirect(url_for('login_page'))
+    else:
+        if request.method == 'POST':
+            course = request.form['course']
+            profs = ', '.join(request.form.getlist('profs'))
+            file_type = request.form['file_type']
+            year = request.form['year']
+            semester = request.form['semester']
+            file = request.files['file']
+            filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}{os.path.splitext(file.filename)[1]}"
+            user_email = session.get("email")
+            
+            file_ID = google_upload(file, filename)
+            file_link = google_retrieve_links(file_ID)
+            
+            with CONNECTION_POOL.getconn() as conn:
+                cursor = conn.cursor()
+                cursor.execute('''
+                    INSERT INTO files (filename, course, profs, year, semester, file_type, file_ID, file_link, uploaded_by) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+                ''', (filename, course, profs, year, semester, file_type, file_ID, file_link, user_email))
+                conn.commit()
+            
+            return redirect(url_for('index'))
         
-        file_ID = google_upload(file, filename)
-        file_link = google_retrieve_links(file_ID)
-        
-        with CONNECTION_POOL.getconn() as conn:
-            cursor = conn.cursor()
-            cursor.execute('''
-                INSERT INTO files (filename, course, profs, year, semester, file_type, file_ID, file_link) 
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-            ''', (filename, course, profs, year, semester, file_type, file_ID, file_link))
-            conn.commit()
-        
-        return redirect(url_for('index'))
-    
-    courses = get_unique_values('courses')
-    professors = get_unique_values('professors')
-    semesters = get_unique_values('semesters')
-    file_types = get_unique_values('file_types')
-    return render_template('upload.html', courses=courses, professors=professors, semesters=semesters, file_types=file_types)
+        courses = get_unique_values('courses')
+        professors = get_unique_values('professors')
+        semesters = get_unique_values('semesters')
+        file_types = get_unique_values('file_types')
+        return render_template('upload.html', courses=courses, professors=professors, semesters=semesters, file_types=file_types)
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -324,23 +389,9 @@ def get_all_suggestions():
         suggestions = [row[0] for row in cursor.fetchall()]
     return suggestions
 
-@app.route('/reset_db', methods=['POST'])
-def reset_db():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin_login'))
-    backup_name = 'database_backup_' + datetime.datetime.now().strftime('%Y%m%d_%H%M%S') + '.db'
-    shutil.copy2('database.db', backup_name)
-
-    with CONNECTION_POOL.getconn() as conn:
-        cursor = conn.cursor()
-        cursor.execute('DROP TABLE IF EXISTS files')
-        cursor.execute('DROP TABLE IF EXISTS professors')
-        cursor.execute('DROP TABLE IF EXISTS courses')
-        cursor.execute('DROP TABLE IF EXISTS file_type')
-        cursor.execute('DROP TABLE IF EXISTS semesters')
-        cursor.execute('DROP TABLE IF EXISTS suggestions')
-    init_db()
-    return redirect(url_for('admin'))
+@app.route('/login_page', methods=['GET'])
+def login_page():
+    return render_template("login.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
