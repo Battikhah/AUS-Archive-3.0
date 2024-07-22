@@ -29,7 +29,7 @@ PARENT_FOLDER_ID = "1n_JeiBFdlxebfC6itq2VLe_dpGF272ya"
 
 # GOOGLE LOG IN VARIABLES
 ######
-# os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 ######
 
 GOOGLE_CLIENT_ID = "580529357076-s9n138qr90qbbjuuqso3d92o8vljedpm.apps.googleusercontent.com"
