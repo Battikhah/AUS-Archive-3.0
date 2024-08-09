@@ -4,19 +4,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="UTF-8" />
 		<title>Search Files</title>
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='styles.css') }}"
-		/>
-		<script
-			async
-			src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2132314938985877"
-			crossorigin="anonymous"
-		></script>
-		<link
-			href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css"
-			rel="stylesheet"
-		/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2132314938985877" crossorigin="anonymous"></script>
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 		<script>
@@ -42,12 +32,10 @@
 	<body>
 		<nav>
 			<ul>
-				<li><a href="{{ url_for('index') }}">Home</a></li>
-				<li><a href="{{ url_for('upload_file') }}">Upload File</a></li>
-				<li><a href="{{ url_for('search') }}">Search Files</a></li>
-				<li>
-					<a href="{{ url_for('view_by_course') }}">View Files by Course</a>
-				</li>
+				<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
+				<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
+				<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
+				<li><a href="{{ url_for('view_by_course') }}" class="footer-btn">View Files by Course</a></li>
 			</ul>
 		</nav>
 		<div class="container">
@@ -71,22 +59,14 @@
 
 				<label for="file_type">File Type:</label>
 				<select name="file_type" id="file_type">
-					<option value="" disabled selected>
-						Select the Type of Document
-					</option>
+					<option value="" disabled selected>Select the Type of Document</option>
 					{% for file_type in file_types %}
 					<option value="{{ file_type }}">{{ file_type }}</option>
 					{% endfor %}</select
 				><br />
 
 				<label for="year">Year:</label>
-				<input
-					type="number"
-					name="year"
-					id="year"
-					min="2000"
-					max="2100"
-				/><br />
+				<input type="number" name="year" id="year" min="2000" max="2100" /><br />
 
 				<label for="semester">Semester:</label>
 				<select name="semester" id="semester">
@@ -115,10 +95,7 @@
 					{% for file in files %}
 					<tr>
 						<td>
-							<a
-								href="https://drive.google.com/uc?export=download&id={{ file[7] }}"
-								>{{ file[1] }}</a
-							>
+							<a href="https://drive.google.com/uc?export=download&id={{ file[7] }}">{{ file[1] }}</a>
 						</td>
 						<td>{{ file[3] }}</td>
 						<td>{{ file[6] }}</td>
@@ -132,20 +109,8 @@
 		</div>
 		<footer>
 			<p>&copy; 2024 AUS Archive</p>
-			<button
-				class="footer-btn"
-				onclick="location.href='contact.html'"
-				style="cursor: pointer"
-			>
-				Contact Us
-			</button>
-			<button
-				class="footer-btn"
-				onclick="location.href='#about'"
-				style="cursor: pointer"
-			>
-				About Us
-			</button>
+			<button class="footer-btn" onclick="location.href='contact.html'" style="cursor: pointer">Contact Us</button>
+			<button class="footer-btn" onclick="location.href='#about'" style="cursor: pointer">About Us</button>
 		</footer>
 	</body>
 </html>
