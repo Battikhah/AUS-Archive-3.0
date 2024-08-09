@@ -206,8 +206,7 @@ def search():
     file_types = get_unique_values('file_types')
     return render_template('search.html', courses=courses, professors=professors, semesters=semesters, files=files, file_types=file_types)
 
-@app.route('/view_by_course')
-def view_by_course():
+
     files_by_course = {}
     with CONNECTION_POOL.getconn() as conn:
         cursor = conn.cursor()

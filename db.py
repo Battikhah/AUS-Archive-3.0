@@ -13,7 +13,8 @@ def init_db(CONNECTION_POOL):
                 file_type TEXT NOT NULL,
                 file_ID TEXT NOT NULL,
                 file_link TEXT NOT NULL,
-                uploaded_by TEXT NOT NULL
+                uploaded_by TEXT NOT NULL,
+                reported BOOLEAN NOT NULL DEFAULT FALSE,
             )
         ''')
         # Course Table
