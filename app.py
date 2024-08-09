@@ -37,8 +37,8 @@ client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
     scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    #redirect_uri="http://127.0.0.1:5000/callback"
-    redirect_uri="https://ausarchive.vercel.app/callback"
+    redirect_uri="http://127.0.0.1:5000/callback"
+    #redirect_uri="https://ausarchive.vercel.app/callback"
 )
 
 def login_is_required(function):
@@ -220,6 +220,15 @@ def search():
             files_by_course[course].append(file)
 
     return render_template('view_by_course.html', files_by_course=files_by_course)
+
+@app.route('/report_file', methods=['POST'])
+def report_file():
+    file_id = request.form.get('file_id')
+    with CONNECTION_POOL.getconn() as conn:
+        cursor = conn.cursor()
+        cursor.execute('UPDATE files SET reported=TRUE WHERE id=%s', (file_id,))
+        conn.commit()
+    return redirect(url_for('search'))
 
 @app.route('/admin_login', methods=['GET', 'POST'])
 def admin_login():

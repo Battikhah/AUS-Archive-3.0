@@ -35,7 +35,6 @@
 				<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
 				<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
 				<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-				
 			</ul>
 		</nav>
 		<div class="container">
@@ -89,10 +88,12 @@
 						<th>File Type</th>
 						<th>Year</th>
 						<th>Semester</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for file in files %}
+					<!-- Table row with report button -->
 					<tr>
 						<td>
 							<a href="https://drive.google.com/uc?export=download&id={{ file[7] }}">{{ file[1] }}</a>
@@ -101,6 +102,12 @@
 						<td>{{ file[6] }}</td>
 						<td>{{ file[4] }}</td>
 						<td>{{ file[5] }}</td>
+						<td style="text-align: center">
+							<form action="{{ url_for('report_file') }}" method="post">
+								<input type="hidden" name="file_id" value="{{ file[0] }}" />
+								<input type="submit" value="Report" />
+							</form>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>

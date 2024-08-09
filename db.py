@@ -14,7 +14,7 @@ def init_db(CONNECTION_POOL):
                 file_ID TEXT NOT NULL,
                 file_link TEXT NOT NULL,
                 uploaded_by TEXT NOT NULL,
-                reported BOOLEAN NOT NULL DEFAULT FALSE,
+                reported BOOLEAN NOT NULL DEFAULT FALSE
             )
         ''')
         # Course Table
@@ -103,3 +103,16 @@ def init_db(CONNECTION_POOL):
             files = ['Midterm 1', 'Midterm 2', 'Midterm 3', 'Final', 'Quiz', 'Assignment', 'Notes', 'Syllabus', 'Book', 'Book Answer Key','Others']
             for name in files:
                 cursor.execute('INSERT INTO file_types (name) VALUES (%s)', (name,))
+
+
+if __name__ == '__main__':
+    import os
+    from psycopg2 import pool
+    from dotenv import load_dotenv
+    load_dotenv("lock.env")
+    CONNECTION_STRING = os.getenv('DATABASE_URL')
+    CONNECTION_POOL = pool.SimpleConnectionPool(1, 250, CONNECTION_STRING)
+    if CONNECTION_POOL:
+        print('Connection pool created successfully')
+    init_db(CONNECTION_POOL)
+    CONNECTION_POOL.closeall()
