@@ -298,6 +298,14 @@ def get_all_suggestions():
         suggestions = [row[0] for row in cursor.fetchall()]
     return suggestions
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/login_page', methods=['GET'])
 def login_page():
     return render_template("login.html")

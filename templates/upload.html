@@ -46,7 +46,6 @@
 				<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
 				<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
 				<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-				
 			</ul>
 		</nav>
 		<div class="container">
@@ -94,8 +93,12 @@
 		</div>
 		<footer>
 			<p>&copy; 2024 AUS Archive</p>
-			<button class="footer-btn" onclick="location.href='contact.html'" style="cursor: pointer">Contact Us</button>
-			<button class="footer-btn" onclick="location.href='#about'" style="cursor: pointer">About Us</button>
+			<nav class="compact-nav">
+				<ul>
+					<li><a href="{{ url_for('contact') }}" class="footer-btn">Contact Us</a></li>
+					<li><a href="{{ url_for('about') }}" class="footer-btn">About Us</a></li>
+				</ul>
+			</nav>
 		</footer>
 	</body>
 </html>

@@ -1,39 +1,44 @@
-<div
-	style="
-		font-family: Sans-serif;
-		background-color: rgb(248, 249, 250);
-		padding: 18px;
-		color: black;
-	"
->
-	<br />
-	<h2 style="font-family: Sans-serif; color: black">About Us !</h2>
-	<h2 style="font-family: Sans-serif; text-align: center">
-		Welcome To <span id="W_Name1">AUS Archive</span>
-	</h2>
-	<p>
-		<span id="W_Name2">AUS Archive</span> is the place to go to find papers related to
-        your studies quickly. We have a wide range of papers from different
-        courses and years. If you have a document that you want to be
-        shared, you can upload it right away through the upload file page.
-        We're always looking to expand our collection. If you have any
-        questions or concerns, feel free to leave a suggestion. AUS Archive
-        is here to help you with your studies.</span> 
-	</p>
-	<p>
-		Your love and support matters a lot.
-	</p>
-	<p style="font-weight: bold; text-align: center">
-		Thank you For Visiting Our Site<br /><br />
-		<span
-			style="
-				color: blue;
-				font-size: 16px;
-				font-weight: bold;
-				text-align: center;
-			"
-			>Have a great day !</span
-		>
-	</p>
-</div>
-<br /><br />
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>About Us</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<nav>
+				<ul>
+					<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
+					<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
+					<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
+				</ul>
+			</nav>
+			<div class="container">
+				<h1>About Us</h1>
+				<section class="about">
+					<h2>Welcome To <span id="W_Name1">AUS Archive</span></h2>
+					<p>
+						<span id="W_Name2">AUS Archive</span> is the place to go to find papers related to your studies quickly. We have a wide range of papers from different courses and
+						years. If you have a document that you want to be shared, you can upload it right away through the upload file page. We're always looking to expand our collection. If
+						you have any questions or concerns, feel free to leave a suggestion. AUS Archive is here to help you with your studies.
+					</p>
+					<p>Your love and support matters a lot.</p>
+					<p style="font-weight: bold; text-align: center">
+						Thank you For Visiting Our Site<br /><br />
+						<span style="color: blue; font-size: 16px; font-weight: bold; text-align: center">Have a great day!</span>
+					</p>
+				</section>
+			</div>
+			<footer>
+				<p>&copy; 2024 AUS Archive</p>
+				<nav class="compact-nav">
+					<ul>
+						<li><a href="{{ url_for('contact') }}" class="footer-btn">Contact Us</a></li>
+						<li><a href="{{ url_for('about') }}" class="footer-btn">About Us</a></li>
+					</ul>
+				</nav>
+			</footer>
+		</div>
+	</body>
+</html>
