@@ -17,6 +17,8 @@ def init_db(CONNECTION_POOL):
                 reported BOOLEAN NOT NULL DEFAULT FALSE
             )
         ''')
+        print('File Table Created')
+
         # Course Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS courses (
@@ -24,6 +26,8 @@ def init_db(CONNECTION_POOL):
                 name TEXT NOT NULL
             )
         ''')
+        print('Course Table Created')
+
         # Professors Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS professors (
@@ -31,6 +35,8 @@ def init_db(CONNECTION_POOL):
                 name TEXT NOT NULL
             )
         ''')
+        print('Professors Table Created')
+
         # File Types Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS file_types (
@@ -38,6 +44,8 @@ def init_db(CONNECTION_POOL):
                 name TEXT NOT NULL
             )
         ''')
+        print('File Types Table Created')
+
         # Years Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS years (
@@ -45,6 +53,8 @@ def init_db(CONNECTION_POOL):
                 name INTEGER NOT NULL  -- Changed from TEXT to INTEGER
             )
         ''')
+        print('Years Table Created')
+
         # Semesters Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS semesters (
@@ -52,6 +62,8 @@ def init_db(CONNECTION_POOL):
                 name TEXT NOT NULL
             )
         ''')
+        print('Semesters Table Created')
+
         # Suggestions Table
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS suggestions (
@@ -59,6 +71,7 @@ def init_db(CONNECTION_POOL):
                 suggestion TEXT NOT NULL
             )
         ''')
+        print('Suggestions Table Created')
         
         cursor.execute('SELECT COUNT(*) FROM professors')
         count = cursor.fetchone()[0]

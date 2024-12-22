@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, abort, session
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
@@ -16,6 +17,9 @@ import requests
 from db import init_db
 
 app = Flask(__name__)
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
 load_dotenv("lock.env")
 
@@ -51,7 +55,7 @@ def login_is_required(function):
 
 @app.route("/login")
 def login():
-    print("Login")
+    logging.debug("Login route accessed")
     authorization_url, state = flow.authorization_url()
     session["state"] = state
     return redirect(authorization_url)
@@ -59,21 +63,22 @@ def login():
 
 @app.route("/callback")
 def callback():
-    print("Callback")
+    logging.debug("Callback route accessed")
     try:
         # Ensure 'state' exists in the session
         if not session["state"] == request.args.get("state"):
             # If 'state' does not match or is missing, handle the error
-            print("Error: State mismatch or missing in session.")
+            logging.error("State mismatch or missing in session.")
             abort(500)  # Or redirect to an error handling route/page
     except KeyError:
         # Handle the case where 'state' is not in the session at all
-        print("Error: 'state' key not found in session.")
+        logging.error("'state' key not found in session.")
         abort(500)  # Or redirect to an error handling route/page
     
     flow.fetch_token(authorization_response=request.url)
 
     if not session["state"] == request.args["state"]:
+        logging.error("State does not match!")
         abort(500)  # State does not match!
 
     credentials = flow.credentials
@@ -104,6 +109,7 @@ def authenticate():
     return creds
 
 def google_upload(file, file_name):
+    logging.debug("Authenticating for Google Drive API")
     creds = authenticate()
     service = build('drive', 'v3', credentials=creds)
 
@@ -115,9 +121,17 @@ def google_upload(file, file_name):
     media = MediaIoBaseUpload(BytesIO(file.read()), mimetype='application/octet-stream', resumable=True)
     file.seek(0)
     
-    file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-    print('File ID: %s' % file.get('id'))
-    return file.get('id')
+    try:
+        logging.debug("Uploading file to Google Drive")
+        file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
+        logging.debug('File ID: %s', file.get('id'))
+        return file.get('id')
+    except google.auth.exceptions.RefreshError as e:
+        logging.error("RefreshError during file upload: %s", e)
+        raise
+    except Exception as e:
+        logging.error("An error occurred during file upload: %s", e)
+        raise
 
 def google_retrieve_links(file_id):
     creds = authenticate()
@@ -134,10 +148,13 @@ def index():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
+    logging.debug("Upload file route accessed")
     if not session.get('google_id'):
+        logging.debug("User not logged in, redirecting to login page")
         return redirect(url_for('login_page'))
     else:
         if request.method == 'POST':
+            logging.debug("Processing file upload")
             course = request.form['course']
             profs = ', '.join(request.form.getlist('profs'))
             file_type = request.form['file_type']
@@ -315,5 +332,7 @@ def ads():
     return render_template('ads.txt')
 
 if __name__ == '__main__':
+    print("Starting Flask app")
     init_db(CONNECTION_POOL=CONNECTION_POOL)
+    logging.debug("Starting Flask app")
     app.run(debug=True)
