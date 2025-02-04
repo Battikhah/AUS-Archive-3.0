@@ -103,10 +103,16 @@
 						<td>{{ file[4] }}</td>
 						<td>{{ file[5] }}</td>
 						<td style="text-align: center">
-							<form action="{{ url_for('report_file') }}" method="post">
-								<input type="hidden" name="file_id" value="{{ file[0] }}" />
-								<input type="submit" value="Report" />
-							</form>
+							<div style="width: 100%; text-align: center">
+								<form action="{{ url_for('report_file') }}" method="post">
+									<input type="hidden" name="file_id" value="{{ file[0] }}" />
+									{% if file[10] %}
+									<input type="submit" value="Reported" disabled style="background-color: #bdbdbd; margin: 0 auto; display: block" />
+									{% else %}
+									<input type="submit" value="Report" style="margin: 0 auto; display: block" />
+									{% endif %}
+								</form>
+							</div>
 						</td>
 					</tr>
 					{% endfor %}
