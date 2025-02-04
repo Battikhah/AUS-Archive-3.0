@@ -1,0 +1,1502 @@
+ACC 201 - Fund of Financial Accounting
+ACC 202 - Fund of Managerial Accounting
+ACC 301 - Intermediate Financial Acctg I
+ACC 302 - Intermediate Financial Acc II
+ACC 303 - Cost Accounting
+ACC 305 - Income Tax I
+ACC 306 - Income Tax II
+ACC 360 - Accounting Information Systems
+ACC 380 - Data Analytics for Accounting
+ACC 385 - Forensic Accounting
+ACC 401 - Advanced Financial Accounting
+ACC 410 - Auditing
+ACC 413 - Introduction to Accounting for Government and Not-Profit Entities
+ACC 420 - Intrntn'l Accounting Standards
+ACC 497 - Business Internship:Accounting
+ACC 510 - Financial Accounting for Mngrs
+ACC 520 - Managerial Accounting
+ACC 530 - Auditing for Managers
+ACC 610 - Topics in Financial Accounting
+ACC 611 - Auditing and Attestation
+ACC 612 - Advanced Topics in Managerial and Cost Accounting
+ACC 614 - Regulatory Environment in ACC
+ACC 615 - Enterprise Database Systems and Analytics
+ACC 616 - Advanced Topics in Financial Reporting
+ACC 620 - Forensic Accounting and Fraud Examination
+ACC 622 - Internal Auditing
+ACC 623 - Financial Statement Reporting and Analysis
+ACC 628 - Fraudulent Financial Reporting
+ACC 695 - Seminar
+ACC 699 - Professional Research Project
+ANT 205 - World Cultures
+ANT 206 - Intro to ANT Archaeology
+ARA 101 - Intro to Arabic Heritage I
+ARA 102 - Intro to Arabic Heritage II
+ARA 103 - Arbc Music_Historical Context
+ARA 104 - Introduction to Arabic Poetry
+ARA 105 - Elementary Arabic I
+ARA 106 - Elementary Arabic II
+ARA 107 - Intensive Elementary Arabic I
+ARA 108 - Intensive Elementary Arabic II
+ARA 181 - The Life of Muhammad (Seerah)
+ARA 201 - Arabic Literature in Translatn
+ARA 203 - Intermediate Arabic I
+ARA 204 - Intermediate Arabic II
+ARA 205 - The Language of the Qur'an
+ARA 206 - Modern Arabic Prose
+ARA 207 - Arabic Drama
+ARA 240 - Arb-Islmc Cultur_Civilization
+ARA 250 - Introduction to Arabic Digital Humanities
+ARA 280 - Introduction to Hadith
+ARA 281 - The Art of Qur'anic Recitation (Tajweed)
+ARA 282 - Reason,Rvltn _Arab-Islmc Thght
+ARA 301 - Arabic Prose to the end of the Abbasid Era
+ARA 303 - Classical Arab/Islamic Culture
+ARA 304 - Modern Arabic Poetry
+ARA 306 - Arabic Travel Writings
+ARA 307 - Arabs and the 'Other'
+ARA 308 - Arabic Grammar in Use
+ARA 320 - The Andalusian Symbiosis
+ARA 340 - The Social Context of Arabic
+ARA 380 - Sufism: Readings in Islamic Mysticism
+ARA 385 - Islamic Texts in Translation
+ARA 402 - Qur'anic Studies
+ARC 201 - Architectural Design Studio I
+ARC 202 - Architectural Design Studio II
+ARC 221 - Pre-Modern Arc and Urban Form
+ARC 222 - Modern Arc and Urban Form
+ARC 225 - Islamic Art and Architecture
+ARC 232 - Materials and Methods I
+ARC 233 - Intro to Digital Fabrication
+ARC 237 - Introductory Techniques in Material Fabrication
+ARC 245 - Intro_Building Cnstrctn-Systms
+ARC 265 - Fundamentals of Digital Design
+ARC 271 - Introduction to Landscape
+ARC 281 - Architectural Principles
+ARC 301 - Architectural Dsgn Studio III
+ARC 302 - Architectural Design Studio IV
+ARC 311 - Illustration and Rendering
+ARC 316 - Photography_Visual Representtn
+ARC 331 - Materials and Methods II
+ARC 342 - Structures for Architects
+ARC 354 - Environmental Energies and Building Form
+ARC 366 - Applied Computer Aided Design
+ARC 382 - Architectural Detailing
+ARC 39302 - Barcelona:Place,Culture_Archt
+ARC 39303 - Places and Culture: Spanish Architecture and Urbanism
+Course Abroad
+ARC 397 - Internship in Architecture
+ARC 39801 - Contemporary Danish Architecture and Culture
+ARC 39802 - Des,Cluture in Cntmprry Italy
+ARC 40101 - Architectural Design Studio V
+ARC 402 - Architectural Design Studio VI
+ARC 421 - Architectural Theory
+ARC 424 - Evolution of Cities
+ARC 433 - Advanced Topics in Digital Fabrication
+ARC 437 - Advanced Topics in Meterial Fabrication
+ARC 451 - Environmental Control Systems
+ARC 463 - Professional Practice
+ARC 465 - Advanced Computer-Aided Design
+ARC 474 - Issues_Contemporary Urban Dsgn
+ARC 49302 - Case Study: EMBT
+Course Abroad
+ARC 497 - Architectural Design Practicum
+ARC 501 - Architectural Dsgn Studio VII
+ARC 502 - Architectural Dsgn Studio VIII
+ARC 581 - Critical Practice and Contemporary Discourse
+ARC 591 - Directed Architectural Design Research
+ARC 592 - Directed Architectural Design Studio
+ART 101 - Survey of Art
+ART 111 - Freehand Drawing
+ART 211 - Intermediate Drawing
+ART 241 - Introductory Painting
+ART 242 - Painting:The Practice of Color
+ART 280 - Introduction to Pottery
+ART 362 - Bernini:Architect,Sculptor,Designer
+ASE 415 - Aircraft Stability_Control
+ASE 450 - Applied Aerodynamics
+ASE 452 - Aerospace Propulsion
+AUS 100 - AUS Seminar
+BIO 101 - General Biology I
+BIO 101L - General Biology Laboratory I
+BIO 102 - General Biology II
+BIO 102L - General Biology Laboratory II
+BIO 103 - Introduction to Human Biology
+BIO 210 - Introduction to Human Anatomy and Physiology
+BIO 251 - Ecology
+BIO 251L - Ecology
+BIO 260 - Genetics and Molecular Biology
+BIO 260L - Genetics and Molecular Biology
+BIO 310 - General Physiology
+BIO 310L - General Physiology
+BIO 330 - Ecosystems Management
+BIO 332 - Cell Biology
+BIO 335 - Microbiology
+BIO 335L - Microbiology
+BIO 341 - Principles of Pharmacology
+BIO 351 - Conservation Biology
+BIO 355 - Medical Parasitology
+BIO 361 - Evolution and Biodiversity
+BIO 371 - Principles of Neuroscience
+BIO 372 - Sensory Perception
+BIO 421 - Marine Environments
+BIO 421L - Marine Environments
+BIO 481 - Cellular_Molecular Immunology
+BIO 490 - Research Methods and Practices in Biology
+BIO 491 - Senior Research Project I
+BIO 492 - Senior Research Project II
+BIS 101 - Business Information Systems
+BLW 301 - Business Law
+BME 210 - Biomedical Ethics
+BME 410 - Biomedical Systems Modeling I
+BME 420 - Biomedical Electronics I
+BME 424L - Biomedical Electronics Lab
+BME 511 - Human Anatomy and Physiology
+BME 533 - Microfluidics and Lab-on-a-Chip Devices
+BME 541 - Biomedical Measurements and Devices
+BME 543 - Biomedical Imaging Technologies
+BME 544 - Neuroengineering
+BME 552 - Drug Delivery
+BME 561 - Healthcare Operations Management
+BME 562 - Healthcare Planning_Rsk Mngmnt
+BME 571 - Biomechanics Engineering
+BME 572 - Biomaterials Engineering
+BME 581 - Biomedical Informatics
+BME 695 - Seminar
+BME 699 - Master's Thesis
+BPE 141 - English Through Cinema
+BPE 142 - English for University Success
+BPE 144 - English Through Social Media
+BPE 145 - English for IELTS
+BPE 146 - English through Current Affair
+BPE 147 - Eng through Emirati History
+BPE 19403 - English Through Soccer
+BSE 701 - Advanced Statistical Methods
+BSE 703 - Research Methods
+BSE 711 - Cell and Molecular Biology Tec
+BSE 711L - Cell and Molecular Biology Tec
+BSE 712 - Advncd Biological Sys Modeling
+BSE 713 - Biomicrofluidics
+BSE 714 - Directed Readings and Academic Presentation
+BSE 721 - Medical Biotechnology
+BSE 722 - Advanced Immunology
+BSE 723 - Current issues in Biomedical sciences
+BSE 724 - Human Molecular Genetics
+BSE 725 - Advanced Neuroscience
+BSE 726 - Human Parasitology
+BSE 731 - Artificial Intelligence in Medicine
+BSE 732 - Biorobotics andMedical Devices
+BSE 733 - Advanced Biomaterials and Synthetic Biology
+BSE 734 - Human Augmentation
+BSE 735 - Advanced Biomedical Signal and Image Processing
+BSE 736 - Healthcare Technology Innovation, Management and Transfer
+BSE 790 - Qualifying Examination
+BSE 795 - Doctoral Seminar
+BSE 799 - Dissertation
+BUS 100 - Introduction to Business
+BUS 300 - International Study Tour
+BUS 397 - Business Internship
+BUS 497 - Business Practicum
+BUS 506 - Introduction to Finance and Econometrics
+BUS 507 - Quantitative Analysis for Business Decisions
+BUS 701 - Philosophical Foundations of Business Research
+BUS 702 - Seminar in Business Administration
+BUS 703 - Advanced Applied Econometrics
+BUS 704 - Applied Time Series Analysis
+BUS 790 - Qualifying Examination
+BUS 791 - Comprehensive Examination
+Comprehensive Examination
+BUS 799 - Dissertation
+CBE 236 - Biomaterials
+CBE 384 - Biochemical Engg Principles
+CBE 414 - Biological SeparationProcesses
+CBE 414L - Biological SeparationProcesses
+CBE 441 - Pharmaceutical Manufacturing
+CBE 445 - Nanomaterials_ Biological App
+CBE 446 - Biotechnology for Air Pollution Control
+CBE 448 - Biomass and Bioenergy
+CBE 483 - Fundmntls of Biomedical Engg
+CBE 490 - Senior Design
+CBE 491 - Senior Design Project II
+CBE 497 - Professional Training in CBE
+CEM 200 - Intro to Digital Construction
+CEM 201 - Building Info Modelling I Lab
+CEM 250 - Sust Construction-Automation
+CEM 251 - Building Info Modelling II Lab
+CEM 300 - Digital Construction Mngmnt
+CEM 301 - Building Info Modelling IIILab
+CEM 325 - Geotechnical Engineering
+CEM 325L - Geotechnical Engineering
+CEM 350 - Mngmnt Systems _Construction
+CEM 360 - Construction Law_ Digital Age
+CEM 410 - Addtv Manufacturing in Constrc
+CEM 415 - Transportation Systems
+CEM 420 - Smart Urban Mobility
+CEM 430 - Smart Civil Infrastructure
+CEM 440 - Construction Safety
+CEM 450 - Foundation and Retaining Syst
+CEM 490 - Senior Design Project I
+CEM 491 - Senior Design Project II
+CEM 497 - Professional Training in DCEM
+CHE 101 - Introduction to Chemical and Biological Engineering
+CHE 205 - Principles of Chemical Enineering I
+CHE 205L - Principles of Chemical Engg I
+CHE 206 - Principles of Chemical Engineering II
+CHE 206R - Princ of Chemcl Eng'g II/Rcttn
+CHE 214 - Chemical Engineering Thermodynamics I
+CHE 214R - Chemical Eng'g Thermodynmcs I
+CHE 230 - Materials Science
+CHE 230L - Materials Science
+CHE 240 - Computer Methods in CHE
+CHE 240L - Computer Methods in CHE
+CHE 300 - Fluid Mechanics
+CHE 304 - Chemical Engineering Thermodynamics II
+CHE 307 - Heat Transfer
+CHE 321 - Chemical Reaction Engineering
+CHE 329 - Mass Transfer
+CHE 350 - Chemical Engineering Lab I
+CHE 397 - Professional Training in CHE
+CHE 412 - Separation Processes
+CHE 421 - Chemical Process Dynamics and Control
+CHE 432 - Process Design and Economics
+CHE 433 - Chemical Process Safety
+CHE 434 - Petroleum Refining Processes
+CHE 434L - Petroleum Refining Processes
+CHE 436 - Natural Gas Processing
+CHE 442 - Electrochemical Engineering and Energy Systems
+CHE 443 - Design and Analysis of Experiments
+CHE 451 - Chemical Engineering Lab II
+CHE 452 - Process Dynamics and Control Laboratory
+CHE 461 - Air Pollution
+CHE 467 - Corrosion
+CHE 467L - Corrosion
+CHE 470 - Waste Management and Control in Chemical Engineering
+CHE 472 - Water_Wastewater Treatment Dsg
+CHE 472L - Water_Wastewater Treatment Dsg
+CHE 473 - Fund_Crbn capture Storage Tech
+CHE 490 - Senior Design Project I
+CHE 491 - Senior Design Project II
+CHE 497 - Professional Training in CHE
+CHE 510 - Transport Phenomena
+CHE 511 - Advanced CHE Thermodynamics
+CHE 512 - Advanced Kinetics and Reactor Design
+CHE 610 - Catalysis_Reaction Engineering
+CHE 611 - Biomedical Engineering and Biotechnology
+CHE 613 - Advanced Materials Science
+CHE 614 - Enviromental Engineering
+CHE 615 - Particle Tech and Fluidization
+CHE 695 - Seminar
+CHE 698 - Professional Project
+CHE 699 - Master's Thesis
+CHM 101 - General Chemistry I
+CHM 101L - General Chemistry Laboratory I
+CHM 102 - General Chemistry II
+CHM 102L - General Chemistry Lab II
+CHM 104 - Basics of Chemistry
+CHM 215 - Organic Chemistry I
+CHM 216 - Organic Chemistry II
+CHM 217 - Organic Chemistry Laboratory I
+CHM 218 - Organic Chemistry Lab II
+CHM 221 - Basic Concepts of Inorganc Chm
+CHM 242 - Quantitative Analysis
+CHM 243 - Quantitative Analysis Lab
+CHM 315 - Organic Chemistry III
+CHM 321 - Transition Metal Chemistry
+CHM 321L - Chemistry of Transition Metals
+CHM 325 - Inorganic Chemistry
+CHM 326 - Inorganic Chemistry Laboratory
+CHM 330 - Physical Chemistry I
+CHM 331 - Physical Chemistry II
+CHM 333 - Physical Chemistry Laboratory
+CHM 334 - Biochemistry Laboratory
+CHM 335 - Physical Chemistry Laboratory
+CHM 345 - Instrumental Analysis
+CHM 345L - Instrumental Analysis
+CHM 350 - Biochemistry
+CHM 362 - Inorganic Biochemistry
+CHM 368 - Molecular Biochemistry
+CHM 382 - Forensic Chemistry
+CHM 415 - Spectroscopy in Organic CHM
+CHM 416 - Systematic Identification of Organic Compounds
+CHM 420 - Nucleic Acids Biochemistry
+CHM 430 - Physical Biochemistry
+CHM 436 - Enzyme Kinetics - Biochemistry
+CHM 490 - Research Methods and Practices in Chemistry and Biochemistry
+CHM 491 - Senior Research Project
+CMP 120 - Programming I
+CMP 120L - Programming I
+CMP 213 - Discrete Structures
+CMP 220 - Programming II
+CMP 220L - Programming II
+CMP 235 - Ethics for computing and Information Technology
+CMP 256 - GUI Design and Programming
+CMP 256L - GUI Design and Programming
+CMP 257 - Web Application Programming
+CMP 257L - Web Application Programming
+CMP 305 - Data Structures and Algorithms
+CMP 305L - Data Structures and Algorithms
+CMP 310 - Operating Systems
+CMP 320 - Database Systems
+CMP 320L - Database Systems
+CMP 321 - Programming Languages
+CMP 321L - Programming Languages
+CMP 333 - Artificial Intelligence
+CMP 340 - Design-Analysis of Algorithms
+CMP 354 - Mobile Application Development
+CMP 354L - Mobile Application Development
+CMP 397 - Professional Training in CMP
+CMP 404 - Cloud Computing
+CMP 416 - Internet and Network Computing
+CMP 416L - Internet and Network Computing
+CMP 430 - Computer Graphics
+CMP 450 - Object-Oriented Software Eng'g
+CMP 454 - Software Testing_Quality Engg
+CMP 466 - Machine Learning and Data Mining
+CMP 490 - Project in Computer Science I
+CMP 491 - Project in Computer II
+CMP 497 - Professional Training in CMP
+CMT 500 - Management of Construction Projects
+CMT 510 - Construction Automation
+CMT 520 - Advncd Construction Scheduling
+CMT 600 - Cost Analysis and Control
+CMT 610 - Building Information Modeling
+CMT 620 - Construction Project Risk Mgt
+CMT 630 - Construction Contracting
+CMT 640 - International Construction
+CMT 650 - Sustainable Infrastructure Mgt
+CMT 660 - Sustainable Development and Construction
+CMT 665 - Construction Safety Management
+CMT 670 - Construction Equipment Mgt
+CMT 698 - Professional Project
+CMT 699 - Master’s Thesis
+COE 221 - Digital Systems
+COE 221L - Digital Systems
+COE 241 - Microcontrollers: Programming and Interfacing
+COE 241L - Microcontrollers: Programming and Interfacing
+COE 242 - Microcontrollers and Embedded Systems
+COE 242L - Microcontrollers-Embedded Syst
+COE 251 - Intro to Computer Systems
+COE 251L - Intro to Computer Systems
+COE 312 - Software Design for Engineers
+COE 312L - Software Design for Engineers
+COE 341 - Cmptr Architecture / Organztn
+COE 370 - Communications Networks
+COE 371 - Computer Networks I
+COE 371L - Computer Networks I
+COE 375 - Modeling and Simulation of Stochastic Systems
+COE 397 - Professional Training in COE
+COE 410 - Embedded Systems:Dsgn_Applctns
+COE 410L - Embedded Systems:Dsgn_Applctns
+COE 411 - Embedded and Cyber Physical Systems
+COE 411L - Embedded-Cyber Physical System
+COE 420 - Software Engineering
+COE 420L - Software Engineering
+COE 421L - Computer Systems Engg Lab
+COE 424 - Advcd Digital Systm Design
+COE 424L - Advcd Digital Systm Design
+COE 425 - Modern Computer Organizations
+COE 428 - VLSI Design
+COE 431 - Industrial Cyber Physical Systems
+COE 431L - Industrial Cyber Physical Syst
+COE 434 - Wireless and Mobile Networks
+COE 444 - Computer Security
+COE 457 - Internet and Internet of Things IoT Programming
+COE 457L - Internet and IoT Programming
+COE 476 - Neural Networks and Deep Learning
+COE 487 - Virtual and Augmented Reality
+COE 490 - Design Project I
+COE 491 - Design Project II
+COE 49413 - Computer Vision
+COE 497 - Professional Training in COE
+COE 505 - Cloud Computing Infrastructure
+COE 530 - Advanced Computer Networks
+COE 533 - Advanced Computer Architecture
+COE 545 - Modeling-Testing_Software Engg
+COE 555 - Cyber Security
+COE 570 - Big Data and Analytics
+COE 630 - Wireless Networks
+COE 632 - Advanced Database Systems
+COE 636 - Adv Multicore - GPU Computing
+COE 637 - Advanced Machine Learning and Data Mining
+COE 639 - Digital Video Compression
+COE 695 - Seminar
+COE 698 - Professional Project
+COE 699 - Master's Thesis
+CVE 111 - Fundamentals of Engg Graphics
+CVE 202 - Construction Materials Lab
+CVE 222 - Statics and Dynamics
+CVE 222R - Statics and Dynamics
+CVE 223 - Mechanics of Materials
+CVE 223R - Mechanics of Materials
+CVE 224 - Construction Materials and Quality Control
+CVE 232 - Geology
+CVE 232L - Geology
+CVE 240 - Fluid Mechanics
+CVE 240L - Fluid Mechanics
+CVE 241 - Elementary Surveying
+CVE 242 - Field Plane Surveying
+CVE 243 - Fundamentals of Geomatics
+CVE 243L - Fundamentals of Geomatics
+CVE 263 - Urban Transportation Planning
+CVE 267 - Civil Engg Economic Analysis
+CVE 301 - Theory of Structures
+CVE 303 - Geotechnical Engineering Lab
+CVE 304 - Envrnmntl and Water Engg Lab
+CVE 310 - Fund of Structural Dynamics
+CVE 312 - Structural Steel Design
+CVE 313 - Reinforced Concrete Design
+CVE 325 - Numerical Methods in Engineering
+CVE 325L - Numerical Mthds in Engineering
+CVE 331 - Geotechnical Engg Principles
+CVE 333 - Geotechnical Engineerng Design
+CVE 341 - Water Resources Engineering
+CVE 351 - Environmental Engineering
+CVE 352 - Environmental Engineering
+CVE 352L - Environmental Engineering
+CVE 363 - Highway Design
+CVE 367 - Prjct Estmtng, Plnng and Cntrl
+CVE 397 - Professional Training in CVE
+CVE 410 - Computer Methods in Structural Analysis
+CVE 411 - Structural Concrete Design
+CVE 414 - Prestressed Concrete Design
+CVE 441 - Coastal Engineering
+CVE 442 - Des of Earth Retaining Strctrs
+CVE 446 - Geotechnical Dam Engineering
+CVE 451 - Urban Water Infrstrctur Mngmnt
+CVE 452 - Water Supply and Sewerage Engineering
+CVE 456 - Traffic Engineering
+CVE 457 - Airport Planning and Design
+CVE 460 - Transportation Systems Mngmt
+CVE 461 - Public Transportation Systems
+CVE 463 - Construction Management
+CVE 467 - Bldng Cnstrctn Materials_Mthds
+CVE 472 - Geographic Information Systems
+CVE 478 - Sustainable Concrete Design
+CVE 490 - Civil Eng'g Design Project I
+CVE 491 - Civil Eng'g Design Project II
+CVE 497 - Professional Training in CVE
+CVE 520 - Sustainable Construction and Methods
+CVE 521 - Finite Element Methods for Solids and Structures
+CVE 522 - Adv Water Resources Engineerng
+CVE 524 - Design of Strengthened Concrete Structures
+CVE 525 - Structural Earthquake Engineering
+CVE 526 - Advanced structural Steel Dsgn
+CVE 527 - Optimization Techniques for Civil Engineering Systems
+CVE 531 - Dynamics of Machine Foundations
+CVE 551 - Wastewater Treatment
+CVE 572 - Satellite Remote Sensing
+CVE 621 - Analysis and Design of Tall Buildings
+CVE 622 - Physical and Chemical Processes in Water Treatment
+CVE 624 - Advncd Geotechnical Engineer'g
+CVE 625 - Highway Bridge Design
+CVE 626 - Bridge Management Systems
+CVE 630 - Designing with Geosynthetics
+CVE 651 - Biological Treatment Process Control
+CVE 695 - Seminar
+CVE 698 - Professional Project
+CVE 699 - Master's Thesis
+DES 101 - Dsgn Foundations for Non-mjrs
+DES 111 - Descriptive Drawing I
+DES 112 - Descriptive Drawing II
+DES 121 - Intro to Arc_Art_Dsgn History
+DES 122 - Modern Dvlpmnts in Arc_Art_Des
+DES 131 - Design Foundations I
+DES 132 - Design Foundations II
+DES 160 - Introduction to Photography
+DES 170 - Introduction to Product Design
+DES 200 - Communication Design
+DES 230 - Visual Communication Design
+DES 231 - History of Design
+DES 232 - Research Methodologies for Des
+DES 270 - Design as Form
+DES 275 - Fundamentals of Design Mngmnt
+DES 29301 - Study Abroad: Seeing and Drawing History in Italy
+DES 300 - User-Centered Design Project
+DES 360 - Critical Discourse in Design
+DES 362 - History of Photogrphy_Portrait
+DES 370 - Introduction to Prototyping
+DES 374 - Package Design
+DES 39418 - Customer Experience Design
+DES 397 - Internship in Design Mngmnt
+DES 462 - Design Management
+DES 475 - Service Design
+DES 480 - Systems and Strategic Design Thinking
+DES 497 - Design Practicum
+DLDG 001 - Dldg: Uni of South Carolina
+ECO 100 - Economics and Society
+ECO 201 - Principles of Microeconomics
+ECO 202 - Principles of Macroeconomics
+ECO 301 - Intermediate Microeconomics
+ECO 302 - Intermediate Macroeconomics
+ECO 305 - International Trade
+ECO 306 - International Monetary Econmcs
+ECO 310 - Development Economics
+ECO 312 - Economics of Labor
+ECO 315 - Economics of the Middle East
+ECO 320 - History of Economic Thought
+ECO 322 - Cost-Benefit Analysis
+ECO 325 - Public Economics
+ECO 327 - Industrial Organization
+ECO 330 - Money and Banking
+ECO 333 - Islamic Economics
+ECO 340 - Real Estate Economics
+ECO 341 - Behavioral Economics
+ECO 350 - Mgt and Analysis of Econ Data
+ECO 351 - Introduction to Econometrics
+ECO 39407 - Intr to Mathematical Economics
+ECO 401 - Managerial Economics
+ECO 404 - Eco of Envirnmtl _ Ntrl Rsrcs
+ECO 410 - Urban and Regional Economics
+ECO 451 - Advanced Econometrics
+ECO 452 - Economic Forecasting
+ECO 490 - Senior Project in ECO
+ECO 497 - Business Internship: Economics
+EGM 361 - Management for Engineers
+EGM 362 - Engineering Project Management
+EGM 363 - Value Analysis and Engineering
+EGM 364 - Engineering Economy
+ELE 101 - Introduction to Electrical Engineering
+ELE 211 - Electric Circuits I
+ELE 211L - Electric Circuits I
+ELE 212 - Electric Circuits II
+ELE 212L - Electric Circuits II
+ELE 225 - Electric Circuits and Devices
+ELE 225L - Electric Circuits and Devices
+ELE 241 - Electronics I
+ELE 241L - Electronics I Lab
+ELE 311 - Electromagnetics
+ELE 320 - Signal Processing and Communications
+ELE 321 - Signals and Systems
+ELE 323 - Signal Processing
+ELE 324 - Digital Signal Processing
+ELE 332L - Measurments / Instrmntn Lab
+ELE 340 - Digital Electronics
+ELE 340L - Digital Electronics
+ELE 341 - Electronics II
+ELE 341L - Electronics II Lab
+ELE 342L - Analog Electronics Laboratory
+ELE 351 - Electrical Energy Conversion
+ELE 351L - Electrical Energy Conversion
+ELE 352 - Electric Machines
+ELE 353 - Control Systems I
+ELE 353L - Control Systems I Lab
+ELE 360 - Probability and Stochastic Processes for Electrical Engineers
+ELE 361 - Communications
+ELE 361L - Communications Lab
+ELE 371 - Power Systems Analysis
+ELE 371L - Electrc Machines/Power Sys Lab
+ELE 372L - Electric Machines-Pwr Sys Lab
+ELE 397 - Professional Training in ELE
+ELE 432 - Medical Instrumentation
+ELE 439L - Medical Electronics Systms Lab
+ELE 440 - Radio Transceivers Design and Analysis
+ELE 441 - Microelectronic Devices
+ELE 444 - Control Systems II
+ELE 451 - Wireless Communications
+ELE 452 - Digital Communications
+ELE 453 - Microwave Engineering
+ELE 454 - Antennas and Propagation
+ELE 456 - Pattern Recognition
+ELE 457 - Satellite Communications
+ELE 458 - Multimedia Cmmnctns and Ntwrkg
+ELE 458L - Communications Systems Lab
+ELE 459 - Intro to Radar Systems
+ELE 460 - Deep Ntwrks in Machine Learng
+ELE 470 - Autonomous Robotic Systems
+ELE 471 - Digital Control Systems
+ELE 476L - Instrmntns & Cntrl Syst Lab
+ELE 481 - Power System Protection
+ELE 482 - Electric Power Dstrbtn Systms
+ELE 483 - Utilization of Electrical Energy
+ELE 485 - Power Electronics
+ELE 486 - Electric Drives
+ELE 487 - Power Conversion in Renewable Energy Systems
+ELE 488L - Power Engineering Lab
+ELE 490 - Elctrical Eng'g Design Proj I
+ELE 491 - Elctrical Eng'g Design Prj II
+ELE 497 - Professional Training in ELE
+ELE 540 - Prncipls of Dgtal Communicatns
+ELE 542 - Applied Electromagnetics
+ELE 543 - Analog Integrated Circuits Design
+ELE 544 - Advanced Signal Processing
+ELE 545 - Power System Operation_Control
+ELE 547 - Distributed Energy Resources in Smart Grids
+ELE 548 - Photovoltaic Energy Systems
+ELE 549 - Optimization in Electrical Engineering
+ELE 641 - Advanced Microwave Engineering
+ELE 644 - Dynmcs_Control of ELE Drives
+ELE 645 - High Voltage Engineering
+ELE 646 - Radio Frequency Intgrtd Circts
+ELE 647 - Dgtl Protectin of Power Systms
+ELE 648 - Pattern Classification
+ELE 650 - Deep Learning
+ELE 660 - RF Power Amplifiers for Wireless and Satellite Communications
+ELE 695 - Seminar
+ELE 698 - Professional Project
+ELE 699 - Master's Thesis
+ELP 001C - English Lang Prep 001(Cntrct)
+ELP 100 - English Language Prep 100
+ELP 100T - Test Preparation
+ELP 111 - Academic Literacy I
+ELP 111L - Academic Literacy I Lab
+ELP 121 - Communication I
+ELP 200 - English Language Prep 200
+ELP 200T - Test Preparation
+ELP 211 - Academic Literacy II
+ELP 211L - Academic Literacy II Lab
+ELP 221 - Communication II
+ELP 231C - ENG Language Prep (cntrct)
+ELP 250 - English Language Prep 250
+ELP 250T - Test Preparation
+ELT 501 - Advanced English Grammar
+ELT 507 - Culture, Society and Language Learning
+ELT 511 - Linguistics for ESL Teachers
+ELT 513 - Lang Acquisition / Development
+ELT 515 - Methods and Materials Dvlpmnt
+ELT 517 - Curriculum Design
+ELT 521 - Reading and Writing in ESL
+ELT 523 - Bilingual Education
+ELT 551 - Language Testing and Evaluation
+ELT 617 - Quantitative, Qualitative and Action Research in ELT
+ELT 619 - Practicum in TESOL
+ELT 699 - Master's Thesis
+ENG 185 - Playing with Texts
+ENG 201 - Intro to Creative Writing
+ENG 203 - Writing About Literature
+ENG 204 - Advanced Academic Writing
+ENG 207 - Professional Communication for Engineers
+ENG 208 - Public Speaking
+ENG 210 - Introduction to Literature
+ENG 214 - 17th-19thC American Literature
+ENG 223 - Introduction to Language Study
+ENG 224 - English Grammar
+ENG 225 - Writing for Business
+ENG 234 - Language in Society
+ENG 250 - World Literature
+ENG 300 - Literary and Critical Theory
+ENG 302 - Stylistics
+ENG 303 - Global Shakespeare
+ENG 305 - Contemporary World Literature
+ENG 308 - British Literature Until 1600
+ENG 309 - British Literature: 1600-1800
+ENG 310 - 19th C British Literature
+ENG 311 - 20th C British Literature
+ENG 314 - Twentieth Century American Lit
+ENG 315 - Colonial_Post Colonail Litr
+ENG 321 - Language and Culture
+ENG 326 - Development of the English Language
+ENG 331 - The Sound Patterns of Language
+ENG 332 - Psychology of Language
+ENG 334 - Meaning in Language
+ENG 340 - Comics
+ENG 372 - English and Globalization
+ENG 378 - Literature as Film
+ENG 382 - Language Variation in Media
+ENG 385 - Language and Gender
+ENG 393 - Shakespeare on Film
+ENG 39409 - Poetry and Poetics
+ENG 39411 - Dgtl Approaches to Literature
+ENG 401 - Advanced English Grammar
+ENG 405 - Discourse Analysis
+ENG 410 - The American Novel
+ENG 416 - Modern Drama and Beyond
+ENG 420 - Teaching and Learning English as a Foreign Language
+ENG 421 - The Novel
+ENG 430 - Modern British Novel
+ENG 490 - Senior Research Project
+ENG 495 - Seminar in English
+ENG 497 - Internship in Eng Lang and Lit
+ENV 100 - Principles of Envrnmtl Science
+ENV 150 - Introduction to Environmental Sustainability
+ENV 201 - Fundamentals of ESS
+ENV 252 - ENV Chemistry and Analysis
+ENV 253 - ENV Chemistry and Analysis Lab
+ENV 280 - Envrnmntl Health and Policy
+ENV 311 - Environmental Modeling
+ENV 352 - Environmental Toxicology-Risk
+ENV 353 - Soil and Water Chemistry
+ENV 353L - Soil and Water Chemistry
+ENV 354 - Assessment and Management of Environmental Impact
+ENV 356 - Climate Change
+ENV 365 - Env -Sustainability Mgt Syst
+ENV 397 - Internship in ESS
+ENV 451 - Sustainable Waste Management
+ENV 453 - Environmental Monitoring and Analysis techniques
+ENV 453L - Environmental Monitoring and Analysis techniques
+ENV 465 - Env Impact Assmt-Monitoring
+ENV 465L - Env Impact Assmt-Monitoring Lb
+ENV 490 - Research Mthds-Prctces in ESS
+ENV 491 - Senior Research Project
+ENV 497 - Internship in Environmental Sc
+ESM 520 - Management for Engineers
+ESM 535 - Introduction to Management Science
+ESM 570 - Project Management
+ESM 575 - Advanced Engineering Economy
+ESM 600 - Research Methodology
+ESM 615 - Big Data and Business Analytcs
+ESM 625 - Entrprs Resource Plann'g Systm
+ESM 630 - Quality Engineering and Mngmnt
+ESM 636 - Human Resources Management for Engineers
+ESM 638 - Decision Analysis
+ESM 640 - Supply Chain Management
+ESM 644 - Financl Mngmnt for Engineers
+ESM 670 - Risk Management
+ESM 675 - Procurement Management
+ESM 685 - Capstone Course in Engineering Systems Management
+ESM 69405 - Service Systems Management
+ESM 695 - Seminar
+ESM 698 - Professional Project
+ESM 699 - Master's Thesis
+ESM 701 - Research Methods
+ESM 702 - Multivariate Data Analysis
+ESM 710 - Advanced Desision Making Analysis
+ESM 711 - Deterministic Optimization Techniques
+ESM 712 - Advanced Supply Chain Management
+ESM 720 - ESM 720 Sustainable Development for Engineers
+ESM 721 - Sustainable Development and Global Competitiveness
+ESM 722 - Sustainable Analytics and Resource Management
+ESM 723 - The Living Building
+ESM 724 - Sustainable Ecosystems
+ESM 725 - Programs and Portfolio Mngmnt
+ESM 730 - Tools for Big Data
+ESM 732 - Networking Architectures for Smart Cities
+ESM 740 - Advanced Quality Engineering
+ESM 741 - Organizational Performance Management
+ESM 742 - Strategic Human Resources Management
+ESM 743 - Strategic Management
+ESM 790 - Qualifying Examination
+ESM 795 - Doctoral Seminar
+ESM 799 - Dissertation
+EWE 331 - Introduction to EWE
+EWE 333 - Water Quality and Treatment
+FIN 201 - Fundamentals of Financial Management
+FIN 304 - Real Estate Investing
+FIN 310 - Analysis of Financl Statements
+FIN 320 - Banking
+FIN 330 - Investments
+FIN 340 - Financial Crime
+FIN 350 - Mergers and Acquisitions
+FIN 360 - Behavioral Finance
+FIN 365 - Cryptocurrencies
+FIN 370 - Fundamentals_ Islamic Finance
+FIN 375 - Trading and Financial Markets
+FIN 389 - Advanced Financial Modeling
+FIN 401 - International Finance
+FIN 402 - Futures and Options
+FIN 404 - Portfolio Management
+FIN 406 - Investment Banking
+FIN 407 - Alternative Investments
+FIN 408 - Entrepreneurial Finance
+FIN 430 - Financial Forecasting
+FIN 440 - Asset Valuation
+FIN 450 - Case Studies_Corporate Finance
+FIN 497 - Business Internship: Finance
+FIN 681 - Advanced Financial Statements Analysis
+FIN 682 - Advanced Corporate Finance
+FIN 683 - Applied Econometrics Methods
+FIN 684 - Investment Analysis and Portfolio Management
+FIN 685 - Advanced Asset Valuation
+FIN 686 - Pricing and Hedging of Financial Derivatives
+FIN 687 - Financial Markets_Institutions
+FIN 688 - Private Equity_Venture Capital
+FIN 689 - Risk Management
+FIN 691 - International Financial Mngmnt
+FIN 692 - Islamic Finance
+FIN 699 - Masters Thesis
+FIN 711 - Finance Theory
+FIN 712 - Contemporary Issues_Fin Rsrch
+FIN 713 - Adv Tpc Fin Mrkts_Institutions
+FIN 714 - Empirical Research Methods in Finance: Asset Pricing
+FIN 715 - Adv Corporate Finance Research
+FIN 721 - Smnr in International Finance
+FIN 722 - Corporate Restructuring and Reorganization
+FIN 723 - Advanced Topics in Corporate Governance and Compensation
+FLM 100 - The Art of Film
+FLM 206 - Cities and Cinema
+FLM 210 - Narrative Structure in Film
+FLM 310 - Film Production
+FLM 332 - Experimental Film and Video
+FLM 410 - Advanced Film Production
+FRN 100 - Elementary French I
+Lecture/Language Practice
+FRN 29401 - Intermediate French I
+GEO 201 - World Cultural Geography
+GMPA 617 - Public Ethics_The Rule of Law
+HIS 204 - Modern Arab History
+HIS 205 - World History I: Ancient and Medieval Worlds
+HIS 206 - World History II: The Modern World
+HIS 208 - Women in History
+HIS 210 - The Making of Modern Europe
+HIS 215 - Mak'g of Modern Southeast Asia
+HIS 217 - The World in the 20th Century
+HIS 221 - History_Science and Technology
+HIS 222 - African History since 1800
+HIS 224 - History of Modern South Asia
+HIS 226 - Maritime History and Culture
+HIS 240 - Intro to American History
+HIS 29407 - History of Medicine
+HIS 29408 - Modern Central Asia
+HIS 307 - Modern Palestinian History
+HIS 308 - Ottoman History
+HIS 310 - Modern Gulf History
+HIS 311 - America and the Middle East
+HIS 322 - The Global African Diaspora
+IDE 201 - Interior Design Studio I
+IDE 202 - Interior Design Studio II
+IDE 225 - History and Theory of Interior Design: Global and Regional Issues
+IDE 239 - Interior Materials and Methods
+IDE 251 - Color and Light
+IDE 301 - Interior Design Studio III
+IDE 302 - Interior Design Studio IV
+IDE 334 - Furniture and Furnishings
+IDE 335 - Furniture Design Basics
+IDE 352 - Environmental Control Systems in Interior Design
+IDE 352L - Environmental Control Systems in Interior Design - Lab
+IDE 397 - Internship in Interior Design
+IDE 401 - Interior Design Studio V
+IDE 402 - Interior Design Studio VI
+IDE 434 - Construction, Detailing and Structures
+IDE 463 - Professional Practice
+IDS 19401 - Designing Stories of Our Lives
+IDS 19402 - Uncovering Cultural Heritage Through Physics
+IDS 29401 - Scientifc Cncpts_Env Rhtrc_UAE
+IDS 29402 - Environmental Law
+IDS 29403 - Sustainable Development
+IDS 39401 - World War I: The Anglo-American Experience in History and Poetry
+IDS 39402 - Trauma and History
+IDS 39403 - Playwriting
+IDS 39404 - The Symbolists
+IDS 39405 - Intellect_Hist_Orign_Islam_Civ
+IDS 39406 - Psychology and Design
+IDS 39407 - Mathematical and Physical Foundations of Quantum Theory
+IEN 301 - Innovation and Entrepreneurship Mindset
+INE 202 - Fundamentals of Industrial Engineering
+INE 222 - Operations Research I
+INE 222R - Operations Research I
+INE 29401 - App of IE Tools and Techniques
+INE 301 - Manufacturing Processes for IE
+INE 301L - Manufacturing Processes for IE
+INE 302 - Manufacturing Processes for IE
+INE 302L - Manufacturing Processes-IE Lab
+INE 310 - Data Mgt and Modeling  for IE
+INE 311 - Quality Engineering
+INE 322 - Operations Research II
+INE 322R - Operations Research II
+INE 323 - Stochastic Processes-Simulatn
+INE 323L - Stochastic Processes-Simulat'n
+INE 331 - Analysis of Production Systems
+INE 332 - Analysis of Supply Chains
+INE 333 - Facility Design and Operations
+INE 397 - Professional Training in IE
+INE 413 - Maintenance Engineering
+INE 415 - Design of Experiments
+INE 416 - Reliability Engineering
+INE 417 - Six Sigma Methodology
+INE 418 - Decision Science for Service and Manufacturing Systems
+INE 425 - Decision Analysis
+INE 431 - Industrial Scheduling
+INE 433 - Logistics Engineering
+INE 439 - Fundamentals of Manufacturing Systems
+INE 450 - Safety Engineering
+INE 460 - Industrial Resources Planning
+INE 465 - Service Systems Engineering
+INE 490 - Senior Design Project I
+INE 491 - Senior Design Project II
+INE 497 - Professional Training in IE
+INS 120 - Global Problems
+INS 130 - History, Culture, Society- UAE
+INS 140 - Oil and Energy in the Contemporary World
+INS 300 - Research Design and Source Analysis
+INS 301 - Globalization
+INS 307 - International Security
+INS 320 - Human Rights in World Politics
+INS 322 - Global Political Economy
+INS 325 - Imperialism
+INS 330 - Women and Politics
+INS 335 - Marxism and Communism
+INS 340 - Fascism and the Populist Radical Right in Europe
+INS 345 - Islam in South Asia
+INS 350 - Moot Court
+INS 365 - Disease and Disaster in History
+INS 420 - Social Theory
+INS 490 - Senior Research Project
+INS 497 - Internship in Intrntl Studies
+INS 501 - Advncd International Affairs
+INS 503 - Research Methods
+INS 505 - Theory-Practice of Leadership
+INS 507 - Conflict Resolution
+INS 511 - Advncd International Security
+INS 513 - Topics in Global Affairs
+INS 515 - Environmental Ethics
+INS 517 - Global Migration
+INS 519 - Advanced Social Theory
+INS 521 - Women’s and Minority Rights
+INS 523 - Civil Wars in History
+INS 525 - Law, Politics and International Crime
+INS 527 - Contemporary MENA Politics and the World
+INS 529 - The Transnational Gulf
+INS 531 - Governing Environmental Sustainability: Theories and Practices
+INS 699 - Master's Thesis
+ISA 201 - Fundamentals of MIS
+ISA 300 - Data Communctns and Netwrk'g
+ISA 301 - Fundmntls of Database Mngmnt
+ISA 303 - Intro to Systems Analysis_Dsgn
+ISA 305 - E-Commerce
+ISA 321 - Object-Oriented Programming for Business Applications
+ISA 363 - Digital Security
+ISA 377 - Data visualization forBusiness
+ISA 380 - Intro to Financial Technology
+ISA 383 - Python for Business
+ISA 388 - Business Analytics
+ISA 39401 - Artificial Intelligence in Bus
+ISA 405 - Information Systems Strategy
+ISA 497 - Business Internship: ISA
+ISM 210 - Digt Sys-Microctrl Interfacing
+ISM 210L - Digt Sys-Microctrl Interfacing
+ISM 216L - Computer Apps in ISM Engg I
+ISM 231 - Thermal-Fluid Sciences
+ISM 243 - Electronic Circuits
+ISM 316L - Computer Apps in ISM Engg II
+ISM 351 - Signal Processing in IS
+ISM 361 - Mechatronic Systems and Instrumentation
+ISM 364L - Measurements and Control Lab
+ISM 371 - Electric Motors and Drives
+ISM 382 - Connectivity in Intelligent Systems
+ISM 383 - Learning in Intelligent System
+ISM 391L - ISM Design Lab
+ISM 411 - Brain Machine Interface
+ISM 412 - Statistical Signal Processing
+ISM 431 - Fluid Power Control
+ISM 433 - Intelligent manufacturing
+ISM 442 - Automotive Electronics
+ISM 443 - Introduction to MEMS
+ISM 484 - Smart Grids
+ISM 490 - Design Project I
+ISM 491 - Design Project II
+ISM 497 - Professional Training in ISME
+KOR 100 - Elementary Korean I
+Lecture/Language Practice
+MBA 601 - Economics for Managers
+MBA 602 - Organizational Theory and Behavior
+MBA 603 - Intro to Business Analytics
+MBA 605 - Financial Management
+MBA 609 - Operations and Supply Chain Management
+MBA 610 - Financial Statement Analysis and Capital Budgeting
+MBA 613 - Managerial Accounting
+MBA 614 - Marketing in the 21st Century
+MBA 618 - Strategic Management
+MBA 640 - Leadership and Change Mngmnt
+MBA 641 - Innovation andEntrepreneurship
+MBA 642 - Knowledge Management
+MBA 661 - Strategic Human Resource Mngmt
+MBA 680 - Project Management
+MBA 681 - Technology Innovation and Digital Strategy
+MBA 695 - Seminar
+MBA 697 - Business Co-op
+MBA 699 - Professional Research Project
+MCE 216L - Intro to Engg Drawing_Workshop
+MCE 220 - Statics
+MCE 220R - Statics
+MCE 222 - Dynamics
+MCE 222R - Dynamics
+MCE 223 - Mechanics of Materials
+MCE 223R - Mechanics of Materials
+MCE 224 - Engineering Mechanics-Statics and Dynamics
+MCE 224R - Eng'g Mech_Statcs_Dynmcs
+MCE 226L - Computer Applications in MCE I
+MCE 230 - Materials Science
+MCE 236L - Solid Modeling
+MCE 240 - Fluid Mechanics
+MCE 240R - Fluid Mechanics
+MCE 241 - Thermodynamics I
+MCE 241R - Thermodynamics
+MCE 310 - Fundamentals of Electromechanical Systems
+MCE 311 - Engineering Measurements
+MCE 311L - Engineering Measurements
+MCE 313 - Engineering Measurements
+MCE 313L - Engineering Measurements Lab
+MCE 321 - Mechanical Design I
+MCE 322 - Mechanical Design II
+MCE 323 - Mechanical Design
+MCE 325 - Numerical Methods in Engr
+MCE 326L - Computer Applctns in MCE II
+MCE 328 - Dynamic Systems
+MCE 331 - Manufacturing Processes
+MCE 332L - Materials and Manufacturing Processes Laboratory
+MCE 341 - Thermodynamics II
+MCE 344 - Heat Transfer
+MCE 345L - Thermofluids Laboratory
+MCE 397 - Professional Training in MCE
+MCE 410 - Control Systems
+MCE 415L - Dynamics_Control Systems Lab
+MCE 416 - Kinematics_Dynmcs of Machinery
+MCE 423 - Mechanical Vibrations
+MCE 438 - Inspection and Nondestructive Testing
+MCE 445 - Energy Systems
+MCE 446 - Refrigeration-Air Conditioning
+MCE 446L - Refrigeration_Air Conditioning
+MCE 447 - Internal Combustion Engines
+MCE 450 - Energy Conservation and Mngmnt
+MCE 451 - Renewable Energy Systems
+MCE 452 - Fuel Cells and Hydrogen Systems
+MCE 464 - Introduction to Robotics
+MCE 466 - Introduction to Mechatronics
+MCE 466L - Introduction to Mechatronics
+MCE 473 - Applied Finite Elmnt Analysis
+MCE 473L - Applied Finite Elmnt Analysis
+MCE 477 - Composite Materials
+MCE 482 - Intermediate Fluid Mechanics
+MCE 485 - Hydraulics of Pipeline Systems
+MCE 487 - Turbomachines
+MCE 488 - Intro_Cmpttnl Fld Dynmcs(CFD)
+MCE 488L - Intro_Cmpttnl Fld Dynmcs (CFD)
+MCE 490 - Design Project I
+MCE 491 - Design Project II
+MCE 497 - Professional Training in MCE
+MCE 540 - Advanced Dynamics
+MCE 551 - Advanced Materials Science and Engineering
+MCE 553 - Advanced Thermodynamics
+MCE 554 - Advanced Fluid Dynamics
+MCE 562 - Modeling and Simulation of MEMS
+MCE 563 - Computational Mechanics
+MCE 59402 - Advanced Vibrations
+MCE 59403 - Advanced Solid Mechanics
+MCE 653 - HVAC Systems Design
+MCE 656 - Advanced Fuel Cell Systems
+MCE 695 - Seminar
+MCE 698 - Professional Project
+MCE 699 - Master's Thesis
+MCM 101 - Digital Video Skills I
+MCM 102 - Introduction to Media Literacy
+MCM 150 - Intro to Media Communication
+MCM 217 - Cyberculture and Identities
+MCM 219 - Global Media
+MCM 222 - Principles of Integrated Marketing Communications
+MCM 225 - Media Theory
+MCM 231 - Writing for Media
+MCM 275 - Principles of Journalism
+MCM 29409 - Understanding Propaganda
+MCM 307 - Film Criticism
+MCM 309 - Social Media Content-Strategy
+MCM 310 - Infographics for Journalism
+MCM 311 - Media Research Methods and Data Analytics
+MCM 320 - Intercultural Communication
+MCM 321 - Media Law and Ethics
+MCM 322 - Case Studies in Integrated Marketing Communications
+MCM 323 - Multiplatform Media Planning
+MCM 326 - Content Creation for Integrated Marketing Communications
+MCM 329 - Mass Communication and Society
+MCM 360 - Crisis and Conflict Communication
+MCM 366 - Stardom and Celebrity Culture
+MCM 367 - Digital MKT Communication
+MCM 371 - News Writing
+MCM 374 - Feature Writing
+MCM 376 - Writing for Magazines
+MCM 377 - Photojournalism
+MCM 378 - Literary Journalism
+MCM 381 - Digital Storytelling for Journalists
+MCM 392 - Women and Film
+MCM 39410 - Digital Video Skills II
+MCM 39411 - Studio Video Production
+MCM 424 - Social Media Strategies
+MCM 474 - Field News Reporting
+MCM 479 - Multimedia Journalism
+MCM 480 - Criticl Analysis of Mass Media
+MCM 485 - Intgrtd Mrkt'g Cmmunctn Cmpgns
+MCM 497 - Mass Communication Internship
+MGT 201 - Fundamentals of Management
+MGT 300 - Mngmnt of Public Organizations
+MGT 301 - Organizational Behavior
+MGT 302 - Managing Human Resources
+MGT 303 - Mngmnt _ Leadership Develpmnt
+MGT 304 - Performance Management
+MGT 305 - International Business
+MGT 306 - Cross_Cultural Management
+MGT 310 - Fund of Family Business
+MGT 313 - Managing Change and Innovation
+MGT 315 - Enterprise Resource Planning
+MGT 316 - Career Management
+MGT 317 - Mnagement for Sustainability
+MGT 321 - Women in Leadership
+MGT 360 - Business Ethics_Socl Rspnsblty
+MGT 380 - Project Management
+MGT 39416 - Management Consulting
+MGT 403 - Entrepreneurship
+MGT 404 - Social Entrepreneurship
+MGT 406 - Business Policy and Strategy
+MGT 497 - Business Internship:Management
+MKT 201 - Fundamentals of Marketing
+MKT 301 - Consumer Behavior
+MKT 302 - Marketing Research
+MKT 303 - E-Commerce
+MKT 305 - Retail Marketing
+MKT 307 - B2B Marketing and Negotiations
+MKT 309 - Global Marketing
+MKT 310 - Marketing Communications
+MKT 354 - Luxury Marketing
+MKT 360 - Digital Marketing
+MKT 365 - Services Marketing
+MKT 370 - Brand Management
+MKT 372 - Tourism Destination Marketing
+MKT 375 - Event Marketing
+MKT 381 - Fashion Marketing
+MKT 383 - New Product Development
+MKT 401 - Marketing Strategy
+MKT 405 - Luxury Brand Management
+MKT 497 - Business Internship: Marketing
+MLR 503 - Data Mining-Knowledge Discovry
+MLR 506 - Hardware Architectures for ML
+MLR 508 - Cognitive Robotics
+MLR 510 - Generative Deep Learning
+MLR 511 - Mob App Development with ML
+MLR 512 - Advanced Computer Vision
+MLR 513 - Adv Natural Lang Processing
+MLR 555 - Adv Artificial  Intelligence
+MLR 570 - Advanced Machine Learning
+MLR 695 - Seminar
+MLR 699 - Master’s Thesis
+MSE 500 - Fundamentals of MSE
+MSE 510 - Thermodynamics in MSE
+MSE 700 - Research Methods in Materials Science and Engineering
+MSE 705 - Diffraction and Crystallograph
+MSE 707 - Magnetic Materials and Devices
+MSE 708 - Electronic Properties_Material
+MSE 710 - Advanced Thermodynamics in MSE
+MSE 711 - Kinetics of Materials
+MSE 718 - Materials for Energy Production and Storage
+MSE 720 - Advanced Characterization and Analytical techniques
+MSE 721 - Surface Science and Technology
+MSE 730 - Advanced Mechanics_Materials
+MSE 731 - Plasticity
+MSE 732 - Fatigue of Materials and Structures
+MSE 733 - Mechanics of Laminated Composite Structures
+MSE 734 - Physical Metallurgy
+MSE 740 - Computational Methods in MSE
+MSE 741 - Advanced Finite Element Method in Materials Science and Engineering
+MSE 750 - Nanomaterials: Science and Applications
+MSE 760 - Advanced Corrosion
+MSE 761 - Advanced Polymers and Composite Materials
+MSE 790 - Qualifying Examination
+MSE 79403 - Laser-Materials Processing
+MSE 795 - Doctoral Seminar
+MSE 799 - Dissertation
+MTH 001 - Preparatory Math for Engineers
+MTH 001R - Preparatory Math for Engineers
+MTH 002 - Prep Business Mathematics
+MTH 003 - Prep Math for Architects
+MTH 100 - Funds of Logic and Geometry
+MTH 101 - Mathematics for Business
+MTH 102 - Calculus for Business
+MTH 103 - Calculus I
+MTH 103R - Calculus I - Recitation
+MTH 104 - Calculus II
+MTH 104R - Calculus II
+MTH 111 - Mathematics for Architects
+MTH 113 - Introduction to Arab/Islamic History of Mathematics
+MTH 203 - Calculus III
+MTH 203R - Calculus III
+MTH 205 - Differential Equations
+MTH 213 - Discrete Mathematics
+MTH 221 - Linear Algebra
+MTH 225 - Differential Equations and Linear Algebra
+MTH 225R - Differ Equ and Linear Algebra
+MTH 243 - Introduction to Mathematical Programming
+MTH 304 - Mathematics of Finance
+MTH 305 - Life Contingencies
+MTH 307 - Theory of Risk
+MTH 311 - Intermediate Analysis
+MTH 312 - Advanced Calculus
+MTH 313 - Number Theory_Its Applications
+MTH 320 - Abstract Algebra I
+MTH 325 - Coding Theory
+MTH 343 - Numerical Analysis I
+MTH 350 - Introduction to Probability
+MTH 351 - Methods of Applied Math
+MTH 382 - Linear Program'g and Optimiztn
+MTH 412 - Complex Variables
+MTH 418 - Graph Theory
+MTH 431 - Dynamical Systems
+MTH 432 - Partial Differential Equations
+MTH 443 - Numerical Analysis II
+MTH 490 - Senior Project
+MTH 500 - Mthmtcl Statstcs with Applctns
+MTH 505 - Ordnry Differential Equations
+MTH 506 - Partial Differential Equations
+MTH 507 - Financial Mathematics I
+MTH 508 - Mathematical Biology
+MTH 511 - Real Analysis
+MTH 512 - Advanced Linear Algebra
+MTH 517 - Numerical Methods for Derivative Pricing
+MTH 520 - Complex Analysis
+MTH 532 - Abstract Algebra
+MTH 551 - Methods of Applied Mathematics
+MTH 555 - Loss and Risk Models
+MTH 560 - Topology
+MTH 565 - Numerical Analysis
+MTH 570 - Optimal Control Theory
+MTH 595 - Seminar
+MTH 599 - Master's Thesis
+MTH 701 - Advanced Probability Theory
+MTH 705 - Theory of Ordinary Differential Equations
+MTH 706 - Analysis of Partial Differential Equations
+MTH 707 - Extreme Values-Financial Risk
+MTH 710 - Functional Analysis
+MTH 711 - Measure Theory
+MTH 715 - Operator Theory
+MTH 733 - Commutative Algebra
+MTH 735 - Nonlinear Algebra
+MTH 736 - Multiplicative Ideal Theory
+MTH 741 - Dynamical Systems and Chaos
+MTH 751 - Algebraic Coding Theory
+MTH 761 - Algebraic Topology
+MTH 762 - Applied Topology
+MTH 775 - Computational Differential Equ
+MTH 790 - Qualifying Examination
+MTH 795 - Doctoral Seminar
+MTH 799 - Dissertation
+MTR 501 - Introduction to Mechatronics
+MTR 501L - Introduction to Mechatronics
+MTR 520 - Embedded systems for mechatronics
+MTR 520L - Embedded Systms for Mchtrncs
+MTR 540 - Advanced Control Systems
+MTR 550 - Robotics System
+MTR 550L - Robotics System
+MTR 610 - Automated Manufactur'g Systems
+MTR 615 - Artificial Intllgnt Systms_MTR
+MTR 644 - Elctrc Drives for MTR systems
+MTR 650 - Applied Linear Estimation
+MTR 670 - Adaptive Control Systems
+MTR 690 - Mechatronics Design
+MTR 690L - Mechatronics Design
+MTR 695 - Mechatronics Seminar
+MTR 699 - Master's Thesis
+MUM 201 - Multimedia Design Studio I
+MUM 202 - Multimedia Design Studio II
+MUM 221 - Motion Graphics and Video
+MUM 301 - Multimedia Design Studio III
+MUM 302 - Multimedia Design Studio IV
+MUM 304 - Media Systems and Publishing
+MUM 311 - Animation
+MUM 331 - 3D Animation
+MUM 360 - Multimedia Dsgn History_Theory
+MUM 39404 - Storytelling in Virtual Reality
+MUM 397 - Internship in Multimedia Desgn
+MUM 404 - Multimedia Design Studio V
+MUM 405 - Multimedia Design Studio V
+MUM 406 - Multimedia Design Studio VI
+MUM 450 - Advanced Techniques in Multimedia Design
+MUS 100 - Music Fundamentals
+MUS 101 - Class Voice and Music Notation
+MUS 102 - Class Oud
+MUS 170 - Class Piano I
+MUS 200 - Intro_European Classical Music
+MUS 202 - World Music
+MUS 203 - Music of the Arab World
+MUS 252 - Applied Lessons
+Private Instrctn/Studio
+MUS 255 - Music Ensemble
+Music Rehearsal
+MUS 270 - Class Piano II
+MUS 302 - Women and the Performing Arts
+MUS 303 - American Pop
+MUS 352 - Advanced Applied Lessons
+Music Rehearsal
+MUS 355 - Advanced Music Ensemble
+Music Rehearsal
+MUS 356 - Musical Theatre and Performance
+NGN 110 - Intro to Eng'g and Computing
+NGN 110R - Intro to Eng'g and Computing
+NGN 111 - Intro to Statistical Analysis
+NGN 111R - Intro to Statistical Analysis
+NGN 112 - Introduction to Artificial Intelligence and Data Science
+NGN 211 - Intro to Engg Probab and Stat
+NGN 211R - Intro to Engg Probability-Stat
+NGN 29402 - App of Probab and Stat in Engg
+NGN 29403 - Digital Tech and Citizenship
+NGN 497 - Professional Experience in Engineering and Computing
+NGN 500 - Advanced Engineering Math
+NGN 505 - Rndm Variabls_Stochstc Prcsses
+NGN 509 - Computational Methods for Engineers
+PHI 201 - Introduction to Philosophy
+PHI 202 - Intro to Islamic Philosophy
+PHI 206 - Ethics and Information Technology
+PHI 207 - Existentialism
+PHI 208 - Modern Philosophy
+PHI 303 - Political Philosophy
+PHI 304 - Themes in Western Thought
+PHI 309 - Ethics and the Environment
+PHY 001 - Preparatory Physics
+PHY 100 - Conceptual Physics
+PHY 101 - General Physics I
+PHY 101L - General Physics I - Lab
+PHY 102 - General Physics II
+PHY 102L - General Physics II - Lab
+PHY 103 - Astronomy
+PHY 104 - Physics for Architects
+PHY 106 - General Physics III
+PHY 113 - Introduction to Astrophysics
+PHY 200L - Intermediate Physics Lab
+PHY 201 - Modern Physics
+PHY 203 - Introduction to Electronics
+PHY 203L - Introduction to Electronics
+PHY 301 - Energy Sources
+PHY 305 - Modern Optics and Lasers
+PHY 310 - Mathematical Methods in PHY
+PHY 313 - Satellites and Space Physics
+PHY 320 - Classical Mechanics
+PHY 330 - Electromagnetic Theory
+PHY 332 - Properties of Matter
+PHY 350 - Quantum Mechanics
+PHY 360 - Fundamentals of Nanophysics
+PHY 39403 - Computational Physics
+PHY 39404 - Contemporary Astrophysics
+PHY 397 - Internship in Physics
+PHY 400L - Contemporary Experimental Phys
+PHY 460 - Thermodynamics_Statistical PHY
+PHY 491 - Senior Research Project I
+PHY 492 - Senior Research Project II
+POL 201 - Intro to Political Studies
+POL 202 - Intro to International Relatns
+POL 29402 - Introduction to Politics of the Middle East and North Africa
+POL 300 - Comparative Politics
+POL 304 - International Organizations
+POL 305 - Public International Law
+POL 308 - American Foreign Policy
+POL 312 - Understanding Terrorism: A Critical Analysis
+POL 409 - Politics and Civil Society in the Middle East
+PSY 101 - Introduction to Psychology
+PSY 102 - Social Psychology
+PSY 250 - Research Methods I
+PSY 301 - Abnormal Psychology
+PSY 302 - Developmental Psychology
+PSY 303 - Health Psychology
+PSY 304 - Personality Psychology
+PSY 305 - Cognitive Psychology
+PSY 306 - Organizational Psychology
+PSY 309 - Psychology of Bilingualism
+PSY 311 - Biopsychology
+PSY 312 - Psychology of Creativity
+PSY 313 - Psychotherapy and Counseling
+PSY 314 - Psychology of Teaching and Learning
+PSY 321 - Cultural Psychology
+PSY 322 - Stereotypes, Prejudice, and Discrimination
+PSY 323 - Psychology of Religion
+PSY 331 - PSY of Language Development
+PSY 350 - Research Methods II
+PSY 351 - Psychology Research Experience
+PSY 403 - Personal and Professional Development
+PSY 404 - History and Systems
+PSY 490 - Research Design
+PSY 49602 - Research Design II
+PSY 497 - Internship in Psychology
+QBA 201 - Quantitative Business Analysis
+SCM 202 - Operations Management
+SCM 310 - Management of the Supply Chain
+SCM 311 - Logistics Management
+SCM 345 - Procurement Management
+SCM 415 - Supply Chain Risk Management
+SCM 420 - Sust Supply Chain Strategies
+SCM 497 - Business Internship:  SCM
+SFE 410 - Fundam of Fire Protection Engg
+SFE 420 - Fire Resistance in Buildings
+SOC 201 - Introduction to Sociology
+SOC 210 - Religion and Society
+SOC 220 - American Society
+SOC 230 - Intro_Chinese Culture Society
+SOC 302 - Environmental Sociology
+SOC 320 - East Asian Societies
+SOC 370 - Wmn's Empwrmnt_Intrntl Dvlpmnt
+SOC 380 - Urban Sociology
+STA 201 - Introduction to Statistics for Engineering and Natural Sciences
+STA 201L - Introduction to Statistics for Engineering and Natural Sciences
+STA 202 - Intro to Stat for Social Sc
+STA 202L - Intro to Stat for Social Sc
+STA 233 - Intro to Survy Smplng_Analysis
+STA 301 - Foundations of Statistics for Data Science
+STA 401 - Introduction to Data Mining
+STA 501 - Advanced Data Mining: Theory and Applications
+THE 101 - Theatre Appreciation
+THE 102 - Introduction to Acting
+THE 141 - Stagecraft
+THE 230 - Dramatic Literature
+THE 242 - Elements of Theatrical Design
+THE 244 - Theatrical Costume Lab
+THE 245 - Technical Theatre Lab
+THE 246 - Costume Design
+THE 251 - Rehearsal and Performance
+Theatre Rehearsal
+THE 255 - Voice and Movement
+THE 301 - Musical Theatre History
+THE 321 - Arts Management
+THE 346 - Theatircal Makeup and Special Effects
+THE 351 - Advanced Rehearsal-Performance
+Theatre Rehearsal
+THE 352 - Dance Styles for the Stage
+THE 355 - Acting Styles
+THE 361 - Playwriting
+TRA 100 - Hist and Prncpls of Arbc Trans
+Lecture/Language Practice
+TRA 210 - Introduction to Translation
+TRA 220 - Thrtcal_Prctcal Issues in TRA
+TRA 230 - Translatng Arbc Literary Texts
+TRA 29402 - Arabic for Translators
+TRA 301 - Modern Media Translation
+TRA 303 - Interpreting:  Focus on the Community
+TRA 307 - Screen Translation
+TRA 500 - Princpls/Strtgs in Translation
+TRA 503 - Theoretical Models of Transltn
+TRA 505 - Interpreting and the Profession I: Consecutive Interpreting.
+TRA 509 - Interpreting and the Profession II: Simultaneous Interpreting
+TRA 510 - Research Methods_Acdmc Writing
+TRA 512 - Trmnlgy, Arbicization_Trnsltr
+TRA 557 - Translation of Administrative and Legal Documents
+TRA 558 - Contrastive Lngstcs and Trsltn
+TRA 560 - Audiovisual Translation
+TRA 580 - Translating Quranic Pragmatics
+TRA 610 - Intercultural Comm_Translatn
+TRA 630 - Practicum
+TRA 699 - Master Thesis
+UPA 100 - University Preparation
+UPL 302 - Analysis of Spatial Phenomena
+UPL 600 - Planning History, Theory and Principles
+UPL 602 - Computer Applications in Planning
+UPL 604 - Urban Planning Research and Analysis
+UPL 621 - Environmental and Land Use Planning
+UPL 623 - Urban Design Principles, Prcesses, and Skills
+UPL 625 - Plan Making, Communication and Process
+UPL 633 - Urban Infrastructure Planning
+UPL 634 - Tourism and Hospitality Planning
+UPL 639 - Urban Planning and Housing Policy
+UPL 651 - Negotiation Strategies
+UPL 655 - Ecological Urbanism
+UPL 680 - Urban Research and Planning Workshop
+UPL 69416 - The Evolution of Urban Form
+VIS 201 - Design Studio I
+VIS 202 - Design Studio II
+VIS 213 - Illustration Drawing
+VIS 221 - Photography Basics
+VIS 231 - Normative Typographic Prncipls
+VIS 242 - Electronic Online Publishing
+VIS 301 - Design Studio III
+VIS 302 - Design Studio IV
+VIS 312 - Illustration Genres
+VIS 313 - Visual Narrative
+VIS 320 - Printmaking: Lithography and Screen Printing Methods
+VIS 326 - Screen Printing:Methods and Techniques
+VIS 327 - Analog Photography Processes
+VIS 328 - Arabic Type Design
+VIS 331 - Complex Typographic System
+VIS 342 - Envrnmt_Exprnce_Intractn Dsgn
+VIS 361 - The Design Profession
+VIS 39408 - Paper Making and Bookbinding
+VIS 397 - Internship in Visual Communctn
+VIS 401 - Design Studio V
+VIS 405 - Design Studio V
+VIS 406 - Design Studio VI
+WRI 001 - Basic Academic Writing
+WRI 101 - Academic Writing I
+WRI 102 - Academic Writing II
+WRI 221 - Peer Tutoring in Writing
+WST 240 - Introductn to Women's Studies
+WST 250 - Women's Voices Across Cultures
+WST 300 - Women, Science and Technology
