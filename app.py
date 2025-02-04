@@ -27,16 +27,16 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 app.secret_key = os.urandom(24)
 
 # GOOGLE DRIVE API VARIABLES
-SCOPES = ['https://www.googleapis.com/auth/drive']
-SERVICE_ACCOUNT_FILE = 'AUS-ARCHIVER.json'
-PARENT_FOLDER_ID = "1n_JeiBFdlxebfC6itq2VLe_dpGF272ya"
+SCOPES = os.getenv("DRIVE_SCOPES", "").split(",")
+SERVICE_ACCOUNT_FILE = os.getenv("SERVICE_ACCOUNT_FILE")
+PARENT_FOLDER_ID = os.getenv("PARENT_FOLDER_ID")
 
 # GOOGLE LOG IN VARIABLES
 ######
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 ######
 
-GOOGLE_CLIENT_ID = "580529357076-s9n138qr90qbbjuuqso3d92o8vljedpm.apps.googleusercontent.com"
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
 flow = Flow.from_client_secrets_file(
     client_secrets_file=client_secrets_file,
