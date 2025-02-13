@@ -2,12 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 
 # Base URL of the website
-base_url = "https://www.aus.edu/college/sba/faculty?page="
-
+base_url = "https://www.aus.edu/college/cas/faculty?page="
+base_urls = ["https://www.aus.edu/college/cas/faculty?page=", "https://www.aus.edu/college/caad/faculty?page=", "https://www.aus.edu/college/sba/faculty?page="]
 # Number of pages to scrape
-num_pages = 7  # Change this to the actual number of pages
+num_pages = 9  # Change this to the actual number of pages
 
-with open('Names/names SBA.txt', "w", encoding="utf-8") as file:
+with open('Names/names CAS.txt', 'r', encoding='utf-8') as existing_file:
+    existing_names = set(existing_file.read().splitlines())
+
+with open('Names/names CAS.txt', "a", encoding="utf-8") as file:
     # Loop over each page
     for page_num in range(num_pages):
         # Construct the URL for the current page
@@ -24,4 +27,7 @@ with open('Names/names SBA.txt', "w", encoding="utf-8") as file:
 
         # Print all the names
         for name in names:
-            file.write(name.text.strip() + '\n')
+            name_text = name.text.strip()
+            if name_text not in existing_names:
+                file.write(name_text + '\n')
+                existing_names.add(name_text)
