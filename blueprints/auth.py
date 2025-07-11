@@ -15,19 +15,40 @@ auth_bp = Blueprint('auth', __name__)
 
 # Initialize OAuth client
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent.parent, "client_secret.json")
 
 # Create OAuth flow
 def get_oauth_flow():
-    return Flow.from_client_secrets_file(
-        client_secrets_file=client_secrets_file,
-        scopes=["https://www.googleapis.com/auth/userinfo.profile", 
-                "https://www.googleapis.com/auth/userinfo.email", 
-                "openid"],
-        redirect_uri="http://127.0.0.1:5000/auth/callback"
-        # Use the following for production:
-        # redirect_uri="https://ausarchive.vercel.app/auth/callback"
-    )
+    # Try to get credentials from app helper functions (supports both local and Vercel)
+    try:
+        from app import get_google_credentials
+        credentials_data = get_google_credentials()
+        if credentials_data:
+            return Flow.from_client_config(
+                credentials_data,
+                scopes=["https://www.googleapis.com/auth/userinfo.profile", 
+                        "https://www.googleapis.com/auth/userinfo.email", 
+                        "openid"],
+                redirect_uri="http://127.0.0.1:5000/auth/callback"
+                # Use the following for production:
+                # redirect_uri="https://ausarchive.vercel.app/auth/callback"
+            )
+    except Exception as e:
+        logging.error(f"Failed to load credentials from helper function: {e}")
+    
+    # Fallback to file-based approach for local development
+    client_secrets_file = os.path.join(pathlib.Path(__file__).parent.parent, "client_secret.json")
+    if os.path.exists(client_secrets_file):
+        return Flow.from_client_secrets_file(
+            client_secrets_file=client_secrets_file,
+            scopes=["https://www.googleapis.com/auth/userinfo.profile", 
+                    "https://www.googleapis.com/auth/userinfo.email", 
+                    "openid"],
+            redirect_uri="http://127.0.0.1:5000/auth/callback"
+            # Use the following for production:
+            # redirect_uri="https://ausarchive.vercel.app/auth/callback"
+        )
+    
+    raise Exception("No Google OAuth credentials found")
 
 def login_is_required(function):
     """Decorator to require login for routes"""

@@ -13,6 +13,7 @@ service-account*.json
 *-service-account.json
 credentials.json
 token.json
+*_base64.txt
 
 # Database Configuration
 database.ini

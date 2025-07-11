@@ -2,6 +2,9 @@ import os
 import logging
 import datetime
 import warnings
+import json
+import base64
+from pathlib import Path
 # Suppress the LibreSSL warning that appears on macOS
 warnings.filterwarnings('ignore', message='.*OpenSSL.*LibreSSL.*')
 from flask import Flask, render_template, session, flash, redirect, request
@@ -18,6 +21,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Load environment variables
+# Try to load from lock.env (local development), fall back to system env (production/Vercel)
 load_dotenv("lock.env")
 
 def create_app():
@@ -144,6 +148,50 @@ app = create_app()
 
 # Make connection pool available to application context
 app.config['CONNECTION_POOL'] = CONNECTION_POOL
+
+# Helper functions for handling credentials in both local and production environments
+def get_google_credentials():
+    """Get Google credentials for both local development and Vercel deployment"""
+    # Try to get from environment variable first (Vercel deployment)
+    client_secret_base64 = os.getenv('GOOGLE_CLIENT_SECRET_JSON_BASE64')
+    if client_secret_base64:
+        try:
+            # Decode base64 and parse JSON
+            client_secret_json = base64.b64decode(client_secret_base64).decode('utf-8')
+            return json.loads(client_secret_json)
+        except Exception as e:
+            logger.error(f"Failed to decode Google credentials from environment: {e}")
+    
+    # Fall back to local file (development)
+    client_secrets_file = Path(__file__).parent / "client_secret.json"
+    if client_secrets_file.exists():
+        with open(client_secrets_file, 'r') as f:
+            return json.load(f)
+    
+    logger.error("No Google credentials found in environment or local file")
+    return None
+
+def get_service_account_credentials():
+    """Get service account credentials for both local development and Vercel deployment"""
+    # Try to get from environment variable first (Vercel deployment)
+    service_account_base64 = os.getenv('SERVICE_ACCOUNT_JSON_BASE64')
+    if service_account_base64:
+        try:
+            # Decode base64 and parse JSON
+            service_account_json = base64.b64decode(service_account_base64).decode('utf-8')
+            return json.loads(service_account_json)
+        except Exception as e:
+            logger.error(f"Failed to decode service account credentials from environment: {e}")
+    
+    # Fall back to local file (development)
+    service_account_file = os.getenv("SERVICE_ACCOUNT_FILE", "AUS-ARCHIVER.json")
+    service_account_path = Path(__file__).parent / service_account_file
+    if service_account_path.exists():
+        with open(service_account_path, 'r') as f:
+            return json.load(f)
+    
+    logger.error("No service account credentials found in environment or local file")
+    return None
 
 if __name__ == '__main__':
     logger.info("Starting Flask app")
