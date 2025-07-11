@@ -21,29 +21,34 @@ A web application for AUS (American University of Sharjah) students to share and
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd AUS-Archive-3.0
    ```
 
 2. **Create virtual environment**
+
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
    ```
 
 3. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Environment Configuration**
+
    ```bash
    cp .env.example lock.env
    # Edit lock.env with your actual configuration values
    ```
 
 5. **Google OAuth Setup**
+
    - Go to [Google Cloud Console](https://console.cloud.google.com/)
    - Create a new project or select existing one
    - Enable Google Drive API and Google+ API
@@ -54,12 +59,14 @@ A web application for AUS (American University of Sharjah) students to share and
      - `https://yourdomain.com/auth/callback` (production)
 
 6. **Google Service Account Setup**
+
    - Create a service account in Google Cloud Console
    - Download the service account key as `AUS-ARCHIVER.json`
    - Create a Google Drive folder and get its ID
    - Share the folder with the service account email
 
 7. **Database Setup**
+
    - Set up a PostgreSQL database
    - Update the `DATABASE_URL` in `lock.env`
 

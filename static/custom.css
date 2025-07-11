@@ -1,0 +1,175 @@
+/* This file contains additional CSS for specific pages */
+
+/* Home page hero section */
+.hero {
+	background: linear-gradient(135deg, var(--primary-color), #004494);
+	color: white;
+	padding: 2.5rem 2rem;
+	border-radius: var(--border-radius);
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.hero h1 {
+	color: white;
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+.hero p {
+	font-size: 1.2rem;
+	max-width: 800px;
+	margin: 0 auto;
+	opacity: 0.9;
+}
+
+/* Search filters */
+.search-filters {
+	background-color: var(--light-color);
+	padding: 1.5rem;
+	border-radius: var(--border-radius);
+	margin-bottom: 2rem;
+}
+
+.filters-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1rem;
+}
+
+/* File cards */
+.file-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1.5rem;
+}
+
+.file-card {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	border-radius: var(--border-radius);
+	overflow: hidden;
+	box-shadow: var(--card-shadow);
+	transition: transform var(--transition-speed);
+}
+
+.file-card:hover {
+	transform: translateY(-5px);
+}
+
+.file-header {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 1rem;
+	font-weight: 500;
+}
+
+.file-body {
+	padding: 1.5rem;
+	flex-grow: 1;
+}
+
+.file-meta {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 0.75rem;
+	font-size: 0.9rem;
+	color: var(--secondary-color);
+}
+
+.file-meta i {
+	width: 20px;
+	text-align: center;
+}
+
+.file-footer {
+	padding: 1rem;
+	background-color: var(--light-color);
+	display: flex;
+	justify-content: space-between;
+}
+
+/* Contact form */
+.contact-form {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+/* About page */
+.about-section {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.feature {
+	display: flex;
+	gap: 1.5rem;
+	align-items: flex-start;
+}
+
+.feature-icon {
+	background-color: rgba(0, 86, 179, 0.1);
+	color: var(--primary-color);
+	width: 60px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	font-size: 1.5rem;
+	flex-shrink: 0;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+	border-radius: var(--border-radius);
+	border: 1px solid #ccc;
+	min-height: 42px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+	line-height: 42px;
+	padding-left: 1rem;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+	height: 42px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+	padding: 6px 10px;
+}
+
+/* Alerts */
+.alert {
+	padding: 1rem;
+	margin-bottom: 1rem;
+	border-radius: var(--border-radius);
+	border-left: 4px solid;
+}
+
+.alert-success {
+	background-color: #d4edda;
+	border-color: var(--success-color);
+	color: #155724;
+}
+
+.alert-info {
+	background-color: #d1ecf1;
+	border-color: var(--info-color);
+	color: #0c5460;
+}
+
+.alert-warning {
+	background-color: #fff3cd;
+	border-color: var(--warning-color);
+	color: #856404;
+}
+
+.alert-danger {
+	background-color: #f8d7da;
+	border-color: var(--danger-color);
+	color: #721c24;
+}
