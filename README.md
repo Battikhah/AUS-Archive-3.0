@@ -108,29 +108,10 @@ Help your fellow students by uploading your own materials:
 
 Be part of a community that believes in helping each other succeed.
 
-## 🎉 Success Stories
-
-> _"AUS Archive saved my GPA! I found past exams for MTH 103 that helped me understand the exam format and practice before my final."_  
-> **- Sarah, CAS Student**
-
-> _"As a transfer student, I was behind on course materials. AUS Archive helped me catch up quickly with all the resources I needed."_  
-> **- Ahmed, CEN Student**
-
-> _"I love how easy it is to share my notes with others. It feels good knowing I'm helping fellow students succeed."_  
-> **- Fatima, SBA Student**
-
-## 📊 By The Numbers
-
-- 🎓 **1000+** Active AUS students
-- 📄 **5000+** Academic resources
-- 📚 **200+** Courses covered
-- ⭐ **4.9/5** User satisfaction rating
-
 ## 🔒 Privacy & Safety
 
 - **Your data is secure**: We use industry-standard encryption
-- **AUS-only community**: Only verified AUS students can access
-- **Moderated content**: All uploads are reviewed for quality and appropriateness
+- **AUS-only community**: Only verified AUS students can access the upload page
 - **Academic integrity**: We promote learning, not cheating
 
 ## 💡 Contribute to the Community
