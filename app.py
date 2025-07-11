@@ -34,6 +34,11 @@ def create_app():
     if os.getenv('VERCEL_URL') or os.getenv('VERCEL_ENV'):
         # In production, ensure static files are served properly
         app.static_url_path = '/static'
+        app.static_folder = os.path.join(app.root_path, 'static')
+        logger.info(f"Production static folder: {app.static_folder}")
+    else:
+        # Development configuration
+        app.static_url_path = '/static'
         app.static_folder = 'static'
     
     # Always use string secret key for Flask-Session
@@ -153,6 +158,15 @@ def create_app():
     def legacy_callback():
         """Redirect legacy callback URL to the new blueprint path"""
         return redirect('/auth/callback' + ('?' + request.query_string.decode() if request.query_string else ''))
+    
+    # Add explicit static file route for Vercel
+    @app.route('/static/<path:filename>')
+    def static_files(filename):
+        """Serve static files explicitly for Vercel compatibility"""
+        from flask import send_from_directory
+        import os
+        static_folder = app.static_folder or os.path.join(app.root_path, 'static')
+        return send_from_directory(static_folder, filename)
     
     return app
 # Create database connection pool
