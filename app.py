@@ -8,7 +8,6 @@ from pathlib import Path
 # Suppress the LibreSSL warning that appears on macOS
 warnings.filterwarnings('ignore', message='.*OpenSSL.*LibreSSL.*')
 from flask import Flask, render_template, session, flash, redirect, request
-from flask_session import Session
 from dotenv import load_dotenv
 from psycopg2 import pool
 from db import init_db
@@ -50,19 +49,28 @@ def create_app():
     app.secret_key = secret_key
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit uploads to 16MB
 
-    # Create session directory if it doesn't exist (for potential future use)
-    session_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flask_session')
-    os.makedirs(session_dir, exist_ok=True)
-    
-    # Try minimal Flask-Session configuration to fix OAuth session issues
-    app.config['SESSION_TYPE'] = 'filesystem'
-    app.config['SESSION_FILE_DIR'] = session_dir
-    app.config['SESSION_PERMANENT'] = False
-    app.config['SESSION_USE_SIGNER'] = False
-    app.config['SESSION_KEY_PREFIX'] = ''
-    
-    # Initialize Flask-Session
-    Session(app)
+    # Configure session handling
+    if os.getenv('VERCEL_URL') or os.getenv('VERCEL_ENV'):
+        # Production: Use client-side sessions (cookies) - no filesystem needed
+        logger.info("Using cookie-based sessions for production")
+    else:
+        # Development: Use filesystem sessions for debugging if available
+        try:
+            session_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flask_session')
+            os.makedirs(session_dir, exist_ok=True)
+            
+            app.config['SESSION_TYPE'] = 'filesystem'
+            app.config['SESSION_FILE_DIR'] = session_dir
+            app.config['SESSION_PERMANENT'] = False
+            app.config['SESSION_USE_SIGNER'] = False
+            app.config['SESSION_KEY_PREFIX'] = ''
+            
+            # Import and initialize Flask-Session
+            from flask_session import Session
+            Session(app)
+            logger.info("Using filesystem sessions for development")
+        except ImportError:
+            logger.info("Flask-Session not available, using cookie sessions")
     
     # For Google authentication
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
