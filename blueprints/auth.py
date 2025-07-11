@@ -18,6 +18,16 @@ GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
 
 # Create OAuth flow
 def get_oauth_flow():
+    # Determine the correct redirect URI based on environment
+    if os.getenv('VERCEL_URL') or os.getenv('VERCEL_ENV'):
+        # Running on Vercel
+        redirect_uri = "https://ausarchive.vercel.app/auth/callback"
+    else:
+        # Local development
+        redirect_uri = "http://127.0.0.1:5000/auth/callback"
+    
+    logging.info(f"Using redirect URI: {redirect_uri}")
+    
     # Try to get credentials from app helper functions (supports both local and Vercel)
     try:
         from app import get_google_credentials
@@ -28,9 +38,7 @@ def get_oauth_flow():
                 scopes=["https://www.googleapis.com/auth/userinfo.profile", 
                         "https://www.googleapis.com/auth/userinfo.email", 
                         "openid"],
-                redirect_uri="http://127.0.0.1:5000/auth/callback"
-                # Use the following for production:
-                # redirect_uri="https://ausarchive.vercel.app/auth/callback"
+                redirect_uri=redirect_uri
             )
     except Exception as e:
         logging.error(f"Failed to load credentials from helper function: {e}")
@@ -43,9 +51,7 @@ def get_oauth_flow():
             scopes=["https://www.googleapis.com/auth/userinfo.profile", 
                     "https://www.googleapis.com/auth/userinfo.email", 
                     "openid"],
-            redirect_uri="http://127.0.0.1:5000/auth/callback"
-            # Use the following for production:
-            # redirect_uri="https://ausarchive.vercel.app/auth/callback"
+            redirect_uri=redirect_uri
         )
     
     raise Exception("No Google OAuth credentials found")
@@ -145,11 +151,17 @@ def callback():
         # Redirect to the saved URL if available
         next_url = session.pop('next_url', None)
         if next_url:
-            logging.info(f"Redirecting to requested URL: {next_url}")
-            return redirect(next_url)
-        else:
-            logging.info("No next URL found, redirecting to upload page")
-            return redirect(url_for("files.upload_file"))
+            # Ensure next_url doesn't contain localhost when in production
+            if (os.getenv('VERCEL_URL') or os.getenv('VERCEL_ENV')) and ('127.0.0.1' in next_url or 'localhost' in next_url):
+                logging.warning(f"Removing localhost URL in production: {next_url}")
+                next_url = None
+            
+            if next_url:
+                logging.info(f"Redirecting to requested URL: {next_url}")
+                return redirect(next_url)
+        
+        logging.info("No valid next URL found, redirecting to upload page")
+        return redirect(url_for("files.upload_file"))
         
     except Exception as e:
         logging.error(f"Error during OAuth callback: {str(e)}")

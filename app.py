@@ -31,6 +31,12 @@ def create_app():
     # Configure app
     app.config['UPLOAD_FOLDER'] = 'uploads'
     
+    # Static file configuration for production
+    if os.getenv('VERCEL_URL') or os.getenv('VERCEL_ENV'):
+        # In production, ensure static files are served properly
+        app.static_url_path = '/static'
+        app.static_folder = 'static'
+    
     # Always use string secret key for Flask-Session
     secret_key = os.environ.get('SECRET_KEY')
     if not secret_key:
@@ -96,6 +102,13 @@ def create_app():
     def process_flash_messages():
         """Process flash messages stored in session and log session info for debugging"""
         try:
+            # Fix any localhost URLs in session when in production
+            if (os.getenv('VERCEL_URL') or os.getenv('VERCEL_ENV')):
+                if 'next_url' in session and session['next_url']:
+                    if '127.0.0.1' in session['next_url'] or 'localhost' in session['next_url']:
+                        logger.warning(f"Removing localhost next_url in production: {session['next_url']}")
+                        session.pop('next_url', None)
+            
             # Log session info for debugging (only for specific routes)
             debug_routes = ['/upload', '/auth/login', '/auth/callback']
             if any(route in request.path for route in debug_routes):
