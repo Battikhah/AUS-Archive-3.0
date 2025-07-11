@@ -52,6 +52,28 @@
     margin: 1rem 0;
     border-radius: var(--border-radius);
 }
+
+.upload-method-toggle {
+    margin: 1rem 0;
+}
+
+.upload-method-toggle .btn-group {
+    border-radius: var(--border-radius);
+}
+
+.upload-method-toggle .btn {
+    border-radius: 0;
+}
+
+.upload-method-toggle .btn:first-child {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.upload-method-toggle .btn:last-child {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
 </style>
 {% endblock %}
 
@@ -133,7 +155,26 @@
                     </div>
                 </div>
                 
+                <!-- Upload Type Selection -->
                 <div class="form-group">
+                    <label class="form-label">Upload Method <span style="color:red">*</span></label>
+                    <div class="upload-method-toggle">
+                        <div class="btn-group w-100" role="group" aria-label="Upload method">
+                            <input type="radio" class="btn-check" name="upload_method" id="file_upload" value="file" checked>
+                            <label class="btn btn-outline-primary" for="file_upload">
+                                <i class="fas fa-file-upload"></i> Upload File
+                            </label>
+                            
+                            <input type="radio" class="btn-check" name="upload_method" id="drive_link" value="drive_link">
+                            <label class="btn btn-outline-primary" for="drive_link">
+                                <i class="fab fa-google-drive"></i> Google Drive Link
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- File Upload Section -->
+                <div class="form-group" id="file-upload-section">
                     <div class="file-upload" id="dropZone">
                         <div class="file-upload-icon">
                             <i class="fas fa-file-upload"></i>
@@ -141,14 +182,37 @@
                         <label for="file" class="file-upload-label">
                             <strong>Choose a file</strong> or drag it here
                         </label>
-                        <input type="file" name="file" id="file" required accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip">
+                        <input type="file" name="file" id="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip">
                         <div class="selected-file-name" id="fileName"></div>
                     </div>
                 </div>
                 
+                <!-- Google Drive Link Section -->
+                <div class="form-group" id="drive-link-section" style="display: none;">
+                    <label for="drive_url">Google Drive Link <span style="color:red">*</span></label>
+                    <input type="url" name="drive_url" id="drive_url" class="form-control" 
+                           placeholder="https://drive.google.com/file/d/your-file-id/view or https://docs.google.com/...">
+                    <small class="form-text text-muted">
+                        <i class="fas fa-info-circle"></i> 
+                        Make sure your Google Drive file is set to "Anyone with the link can view" for public access.
+                        <a href="javascript:void(0)" onclick="showDriveHelp()">How to share?</a>
+                    </small>
+                    
+                    <!-- Drive Help Modal Trigger -->
+                    <div class="alert alert-info mt-2" id="drive-help" style="display: none;">
+                        <h6><i class="fas fa-question-circle"></i> How to share your Google Drive file:</h6>
+                        <ol>
+                            <li>Open your file in Google Drive</li>
+                            <li>Click the "Share" button</li>
+                            <li>Change access to "Anyone with the link can view"</li>
+                            <li>Copy the link and paste it above</li>
+                        </ol>
+                    </div>
+                </div>
+                
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-cloud-upload-alt"></i> Upload File
+                    <button type="submit" class="btn btn-primary" id="submit-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> <span id="submit-text">Upload File</span>
                     </button>
                 </div>
             </form>
@@ -212,7 +276,14 @@ $(document).ready(function() {
     // Form validation
     $('#uploadForm').on('submit', function(e) {
         let valid = true;
-        const requiredFields = ['course', 'file_type', 'year', 'semester', 'file'];
+        const uploadMethod = document.querySelector('input[name="upload_method"]:checked').value;
+        let requiredFields;
+        
+        if (uploadMethod === 'file') {
+            requiredFields = ['course', 'file_type', 'year', 'semester', 'file'];
+        } else {
+            requiredFields = ['course', 'file_type', 'year', 'semester', 'drive_url'];
+        }
         
         requiredFields.forEach(field => {
             const input = document.getElementById(field);
@@ -234,7 +305,46 @@ $(document).ready(function() {
             alert('Please fill all required fields');
         }
     });
+    
+    // Upload method toggle functionality
+    const fileUploadRadio = document.getElementById('file_upload');
+    const driveUploadRadio = document.getElementById('drive_link');
+    const fileUploadSection = document.getElementById('file-upload-section');
+    const driveLinkSection = document.getElementById('drive-link-section');
+    const fileInput2 = document.getElementById('file');
+    const driveUrlInput = document.getElementById('drive_url');
+    
+    function toggleUploadMethod() {
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+        
+        if (fileUploadRadio.checked) {
+            fileUploadSection.style.display = 'block';
+            driveLinkSection.style.display = 'none';
+            fileInput2.required = true;
+            driveUrlInput.required = false;
+            submitBtn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> <span id="submit-text">Upload File</span>';
+        } else {
+            fileUploadSection.style.display = 'none';
+            driveLinkSection.style.display = 'block';
+            fileInput2.required = false;
+            driveUrlInput.required = true;
+            submitBtn.innerHTML = '<i class="fab fa-google-drive"></i> <span id="submit-text">Share Drive Link</span>';
+        }
+    }
+    
+    fileUploadRadio.addEventListener('change', toggleUploadMethod);
+    driveUploadRadio.addEventListener('change', toggleUploadMethod);
+    
+    // Initial toggle
+    toggleUploadMethod();
 });
+
+// Function to show/hide drive help
+function showDriveHelp() {
+    const helpDiv = document.getElementById('drive-help');
+    helpDiv.style.display = helpDiv.style.display === 'none' ? 'block' : 'none';
+}
 </script>
 {% endblock %}
 			</nav>

@@ -25,11 +25,25 @@ def login_required(f):
 
 def authenticate():
     """Authenticate with Google Drive API"""
+    try:
+        # Try to use helper function first (supports both local and Vercel)
+        from app import get_service_account_credentials
+        credentials_data = get_service_account_credentials()
+        if credentials_data:
+            SCOPES = os.getenv("DRIVE_SCOPES", "").split(",")
+            return service_account.Credentials.from_service_account_info(credentials_data, scopes=SCOPES)
+    except Exception as e:
+        logging.error(f"Failed to get credentials from helper function: {e}")
+    
+    # Fallback to local file approach
     SCOPES = os.getenv("DRIVE_SCOPES", "").split(",")
     SERVICE_ACCOUNT_FILE = os.getenv("SERVICE_ACCOUNT_FILE")
     
-    creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    return creds
+    if SERVICE_ACCOUNT_FILE and os.path.exists(SERVICE_ACCOUNT_FILE):
+        creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+        return creds
+    
+    raise Exception("No service account credentials found")
 
 def google_upload(file, file_name):
     """Upload file to Google Drive"""
@@ -56,14 +70,101 @@ def google_upload(file, file_name):
         logging.error("An error occurred during file upload: %s", e)
         raise
 
-def google_retrieve_links(file_id):
-    """Get public link to file in Google Drive"""
+def google_retrieve_links(file_ID):
+    """Retrieve shareable link for uploaded file"""
+    logging.debug("Retrieving links for uploaded file")
     creds = authenticate()
     service = build('drive', 'v3', credentials=creds)
+    
+    # Make the file publicly accessible
+    permission = {
+        'type': 'anyone',
+        'role': 'reader',
+    }
+    service.permissions().create(fileId=file_ID, body=permission).execute()
+    
+    # Get the shareable link
+    file = service.files().get(fileId=file_ID, fields='webViewLink').execute()
+    return file['webViewLink']
 
-    file = service.files().get(fileId=file_id, fields='webViewLink').execute()
-    link = file.get('webViewLink')
-    return link
+def process_drive_link(drive_url, course, file_type, profs, semester, year):
+    """Process Google Drive link and extract file information"""
+    import re
+    
+    try:
+        # Extract file ID from various Google Drive URL formats
+        file_id = extract_drive_file_id(drive_url)
+        if not file_id:
+            return None, None, None
+        
+        # Try to get file information from Google Drive API
+        try:
+            from app import get_service_account_credentials
+            credentials_data = get_service_account_credentials()
+            if credentials_data:
+                creds = service_account.Credentials.from_service_account_info(
+                    credentials_data, 
+                    scopes=os.getenv("DRIVE_SCOPES", "").split(",")
+                )
+                service = build('drive', 'v3', credentials=creds)
+                
+                # Get file information
+                file_info = service.files().get(fileId=file_id, fields='name,mimeType,webViewLink').execute()
+                
+                # Create a descriptive filename
+                original_name = file_info.get('name', 'Unknown')
+                file_extension = os.path.splitext(original_name)[1] or get_extension_from_mimetype(file_info.get('mimeType', ''))
+                filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}-{original_name}"
+                
+                return file_id, filename, file_info['webViewLink']
+        except Exception as e:
+            logging.warning(f"Could not access file info via API: {e}")
+        
+        # Fallback: create filename without API access
+        filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}-SharedLink"
+        
+        # Return the provided URL as the link (user must ensure it's shareable)
+        return file_id, filename, drive_url
+        
+    except Exception as e:
+        logging.error(f"Error processing drive link: {e}")
+        return None, None, None
+
+def extract_drive_file_id(url):
+    """Extract file ID from Google Drive URL"""
+    import re
+    
+    # Common Google Drive URL patterns
+    patterns = [
+        r'/file/d/([a-zA-Z0-9-_]+)',  # https://drive.google.com/file/d/FILE_ID/view
+        r'/document/d/([a-zA-Z0-9-_]+)',  # Google Docs
+        r'/spreadsheets/d/([a-zA-Z0-9-_]+)',  # Google Sheets
+        r'/presentation/d/([a-zA-Z0-9-_]+)',  # Google Slides
+        r'id=([a-zA-Z0-9-_]+)',  # Query parameter format
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, url)
+        if match:
+            return match.group(1)
+    
+    return None
+
+def get_extension_from_mimetype(mimetype):
+    """Get file extension from MIME type"""
+    mime_to_ext = {
+        'application/pdf': '.pdf',
+        'application/msword': '.doc',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '.docx',
+        'application/vnd.ms-powerpoint': '.ppt',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation': '.pptx',
+        'application/vnd.ms-excel': '.xls',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '.xlsx',
+        'application/vnd.google-apps.document': '.gdoc',
+        'application/vnd.google-apps.spreadsheet': '.gsheet',
+        'application/vnd.google-apps.presentation': '.gslides',
+    }
+    return mime_to_ext.get(mimetype, '')
 
 def get_unique_values(table):
     """Get unique values from a database table"""
@@ -111,25 +212,46 @@ def upload_file():
         file_type = request.form['file_type']
         year = request.form['year']
         semester = request.form['semester']
-        file = request.files['file']
+        upload_method = request.form.get('upload_method', 'file')
         
-        # Validate file
-        is_valid, message = validate_file(file)
-        if not is_valid:
-            session['flash_message'] = message
-            session['flash_category'] = "danger"
-            return redirect(url_for('files.upload_file'))
-            
-        # Create filename
-        file_extension = os.path.splitext(file.filename or '')[1]
-        filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}{file_extension}"
         user_email = session.get("email")
         
-        try:
-            # Upload to Google Drive
-            file_ID = google_upload(file, filename)
-            file_link = google_retrieve_links(file_ID)
+        if upload_method == 'drive_link':
+            # Handle Google Drive link
+            drive_url = request.form['drive_url']
             
+            # Validate and process Drive URL
+            file_ID, filename, file_link = process_drive_link(drive_url, course, file_type, profs, semester, year)
+            if not file_ID:
+                session['flash_message'] = "Invalid Google Drive link. Please check the URL and sharing permissions."
+                session['flash_category'] = "danger"
+                return redirect(url_for('files.upload_file'))
+        else:
+            # Handle file upload
+            file = request.files['file']
+            
+            # Validate file
+            is_valid, message = validate_file(file)
+            if not is_valid:
+                session['flash_message'] = message
+                session['flash_category'] = "danger"
+                return redirect(url_for('files.upload_file'))
+                
+            # Create filename
+            file_extension = os.path.splitext(file.filename or '')[1]
+            filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}{file_extension}"
+            
+            try:
+                # Upload to Google Drive
+                file_ID = google_upload(file, filename)
+                file_link = google_retrieve_links(file_ID)
+            except Exception as e:
+                logging.error(f"Google Drive upload failed: {str(e)}")
+                session['flash_message'] = "Upload failed. Please try again."
+                session['flash_category'] = "danger"
+                return redirect(url_for('files.upload_file'))
+        
+        try:
             # Save to database
             with CONNECTION_POOL.getconn() as conn:
                 cursor = conn.cursor()
@@ -140,11 +262,11 @@ def upload_file():
                 conn.commit()
             
             # Add success message
-            session['flash_message'] = "File uploaded successfully!"
+            session['flash_message'] = "Resource shared successfully!" if upload_method == 'drive_link' else "File uploaded successfully!"
             session['flash_category'] = "success"
             
             # Log upload for analytics
-            logging.info(f"File uploaded: {course}, {file_type}, by: {user_email}")
+            logging.info(f"{'Drive link' if upload_method == 'drive_link' else 'File'} uploaded: {course}, {file_type}, by: {user_email}")
             
             # Record upload in analytics
             import requests
