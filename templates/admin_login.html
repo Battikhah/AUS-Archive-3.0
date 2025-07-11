@@ -1,22 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Admin Login</title>
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='styles.css') }}"
-		/>
-	</head>
+{% extends 'layout.html' %} {% block title %}Admin Login | AUS Archive{% endblock %} {% block additional_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+<style>
+	.admin-login-container {
+		max-width: 500px;
+		margin: 2rem auto;
+	}
 
-	<body>
-		<div class="container">
-			<h1>Admin Login</h1>
-			<form action="{{ url_for('admin_login') }}" method="post">
-				<label for="password">Password:</label>
-				<input type="password" name="password" id="password" required />
-				<button type="submit">Submit</button>
+	.admin-login-form {
+		padding: 2rem;
+	}
+
+	.admin-icon {
+		font-size: 4rem;
+		color: var(--primary-color);
+		margin-bottom: 1rem;
+	}
+</style>
+{% endblock %} {% block content %}
+<div class="admin-login-container fade-in">
+	<div class="card">
+		<div class="card-header text-center">
+			<h2><i class="fas fa-user-shield"></i> Admin Login</h2>
+			<p>Access the admin dashboard to manage AUS Archive</p>
+		</div>
+		<div class="card-body">
+			<div class="text-center mb-4">
+				<div class="admin-icon">
+					<i class="fas fa-lock"></i>
+				</div>
+				<p>Please enter your admin password to continue</p>
+			</div>
+
+			<form action="{{ url_for('admin.admin_login') }}" method="post" class="admin-login-form">
+				<div class="form-group">
+					<label for="password">Password</label>
+					<input type="password" name="password" id="password" class="form-control" required />
+				</div>
+
+				<div class="form-group text-center mt-4">
+					<button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
+				</div>
 			</form>
 		</div>
-	</body>
-</html>
+	</div>
+
+	<div class="text-center mt-4">
+		<a href="{{ url_for('main.index') }}" class="btn btn-secondary"> <i class="fas fa-arrow-left"></i> Back to Home </a>
+	</div>
+</div>
+{% endblock %}

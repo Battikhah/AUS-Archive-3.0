@@ -1,41 +1,286 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Admin Page</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-	</head>
+{% extends 'layout.html' %} {% block title %}Admin Dashboard | AUS Archive{% endblock %} {% block additional_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+<style>
+	.admin-stats {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
 
-	<body>
-		<nav>
-			<ul>
-				<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
-				<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
-				<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-				
-			</ul>
-		</nav>
-		<div class="container">
-			<h1>Admin Page</h1>
-			<form action="{{ url_for('admin') }}" method="post">
-				<label for="course">Add Course:</label>
-				<input type="text" name="course" id="course" />
-				<input type="submit" value="Add Course" />
+	.stat-card {
+		background-color: white;
+		border-radius: var(--border-radius);
+		padding: 1.5rem;
+		box-shadow: var(--card-shadow);
+		text-align: center;
+	}
+
+	.stat-icon {
+		font-size: 2.5rem;
+		margin-bottom: 1rem;
+		color: var(--primary-color);
+	}
+
+	.stat-value {
+		font-size: 2rem;
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+	}
+
+	.stat-label {
+		color: var(--secondary-color);
+		font-size: 0.9rem;
+	}
+
+	.admin-tabs {
+		display: flex;
+		border-bottom: 1px solid #dee2e6;
+		margin-bottom: 1.5rem;
+	}
+
+	.admin-tab {
+		padding: 0.75rem 1.5rem;
+		cursor: pointer;
+		border-bottom: 2px solid transparent;
+		font-weight: 500;
+	}
+
+	.admin-tab.active {
+		border-bottom-color: var(--primary-color);
+		color: var(--primary-color);
+	}
+
+	.tab-content {
+		display: none;
+	}
+
+	.tab-content.active {
+		display: block;
+	}
+
+	.suggestion-list {
+		max-height: 400px;
+		overflow-y: auto;
+	}
+
+	.suggestion-item {
+		padding: 1rem;
+		border-bottom: 1px solid #eee;
+	}
+
+	.suggestion-item:last-child {
+		border-bottom: none;
+	}
+</style>
+{% endblock %} {% block content %}
+<div class="hero fade-in">
+	<h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+	<p>Manage courses, professors, and view user suggestions</p>
+</div>
+
+<div class="card mb-3">
+	<div class="card-header">
+		<div class="flex justify-between items-center">
+			<h2><i class="fas fa-chart-line"></i> Overview</h2>
+			<div>
+				<a href="{{ url_for('admin.analytics_dashboard') }}" class="btn btn-primary me-2"> <i class="fas fa-chart-bar"></i> Analytics </a>
+				<a href="{{ url_for('main.index') }}" class="btn btn-secondary"> <i class="fas fa-sign-out-alt"></i> Logout </a>
+			</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="admin-stats">
+			<div class="stat-card">
+				<div class="stat-icon">
+					<i class="fas fa-book"></i>
+				</div>
+				<div class="stat-value">{{ courses|length }}</div>
+				<div class="stat-label">Total Courses</div>
+			</div>
+
+			<div class="stat-card">
+				<div class="stat-icon">
+					<i class="fas fa-user-tie"></i>
+				</div>
+				<div class="stat-value">{{ professors|length }}</div>
+				<div class="stat-label">Total Professors</div>
+			</div>
+
+			<div class="stat-card">
+				<div class="stat-icon">
+					<i class="fas fa-lightbulb"></i>
+				</div>
+				<div class="stat-value">{{ suggestions|length }}</div>
+				<div class="stat-label">User Suggestions</div>
+			</div>
+
+			<div class="stat-card">
+				<div class="stat-icon">
+					<i class="fas fa-calendar-alt"></i>
+				</div>
+				<div class="stat-value">{{ semesters|length }}</div>
+				<div class="stat-label">Semesters</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header">
+		<div class="admin-tabs">
+			<div class="admin-tab active" data-tab="courses"><i class="fas fa-book"></i> Courses</div>
+			<div class="admin-tab" data-tab="professors"><i class="fas fa-user-tie"></i> Professors</div>
+			<div class="admin-tab" data-tab="semesters"><i class="fas fa-calendar-alt"></i> Semesters</div>
+			<div class="admin-tab" data-tab="suggestions"><i class="fas fa-lightbulb"></i> Suggestions</div>
+		</div>
+	</div>
+	<div class="card-body">
+		<!-- Courses Tab -->
+		<div class="tab-content active" id="courses-tab">
+			<form action="{{ url_for('admin.admin_panel') }}" method="post" class="mb-4">
+				<div class="form-group">
+					<label for="course">Add New Course</label>
+					<div class="flex gap-2">
+						<input type="text" name="course" id="course" class="form-control" placeholder="e.g., CMP 120 - Introduction to Computer Science" />
+						<button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
+					</div>
+				</div>
 			</form>
-			<form action="{{ url_for('admin') }}" method="post">
-				<label for="prof">Add Professor:</label>
-				<input type="text" name="prof" id="prof" />
-				<input type="submit" value="Add Professor" />
+
+			<h3>Existing Courses ({{ courses|length }})</h3>
+			<div class="table-container">
+				<table>
+					<thead>
+						<tr>
+							<th>Course Code</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for course in courses %}
+						<tr>
+							<td>{{ course }}</td>
+							<td>
+								<button class="btn btn-danger btn-sm">
+									<i class="fas fa-trash"></i>
+								</button>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Professors Tab -->
+		<div class="tab-content" id="professors-tab">
+			<form action="{{ url_for('admin.admin_panel') }}" method="post" class="mb-4">
+				<div class="form-group">
+					<label for="prof">Add New Professor</label>
+					<div class="flex gap-2">
+						<input type="text" name="prof" id="prof" class="form-control" placeholder="e.g., Dr. John Smith" />
+						<button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
+					</div>
+				</div>
 			</form>
-			<h2>Suggestions</h2>
-			<ul>
+
+			<h3>Existing Professors ({{ professors|length }})</h3>
+			<div class="table-container">
+				<table>
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for professor in professors %}
+						<tr>
+							<td>{{ professor }}</td>
+							<td>
+								<button class="btn btn-danger btn-sm">
+									<i class="fas fa-trash"></i>
+								</button>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Semesters Tab -->
+		<div class="tab-content" id="semesters-tab">
+			<form action="{{ url_for('admin.admin_panel') }}" method="post" class="mb-4">
+				<div class="form-group">
+					<label for="semester">Add New Semester</label>
+					<div class="flex gap-2">
+						<input type="text" name="semester" id="semester" class="form-control" placeholder="e.g., Spring 2025" />
+						<button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i> Add</button>
+					</div>
+				</div>
+			</form>
+
+			<h3>Existing Semesters</h3>
+			<div class="table-container">
+				<table>
+					<thead>
+						<tr>
+							<th>Semester</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for semester in semesters %}
+						<tr>
+							<td>{{ semester }}</td>
+							<td>
+								<button class="btn btn-danger btn-sm">
+									<i class="fas fa-trash"></i>
+								</button>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- Suggestions Tab -->
+		<div class="tab-content" id="suggestions-tab">
+			<h3>User Suggestions</h3>
+
+			{% if suggestions %}
+			<div class="suggestion-list">
 				{% for suggestion in suggestions %}
-				<li>{{ suggestion }}</li>
+				<div class="suggestion-item">
+					<p>{{ suggestion }}</p>
+				</div>
 				{% endfor %}
-			</ul>
+			</div>
+			{% else %}
+			<p>No suggestions submitted yet.</p>
+			{% endif %}
 		</div>
-		<div class="footer">
-			<p>&copy; 2024 AUS Archive</p>
-		</div>
-	</body>
-</html>
+	</div>
+</div>
+{% endblock %} {% block additional_scripts %}
+<script>
+	$(document).ready(function () {
+		// Tab switching functionality
+		$(".admin-tab").on("click", function () {
+			// Remove active class from all tabs
+			$(".admin-tab").removeClass("active");
+			$(".tab-content").removeClass("active");
+
+			// Add active class to clicked tab
+			$(this).addClass("active");
+
+			// Show corresponding content
+			const tabId = $(this).data("tab") + "-tab";
+			$("#" + tabId).addClass("active");
+		});
+	});
+</script>
+{% endblock %}

@@ -1,49 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Contact Us</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-	</head>
-	<body>
-		<div class="wrapper">
-			<nav>
-				<ul>
-					<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
-					<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
-					<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-				</ul>
-			</nav>
-			<div class="container">
-				<h1>Contact Us</h1>
-				<section class="contact">
-					<h2>Wanna connect with us?</h2>
-					<p>You can do so through the below mentioned links.</p>
-					<div class="contact-info">
-						<div class="contact-item">
-							<img decoding="async" src="https://cdn-icons-png.flaticon.com/512/4213/4213968.png" alt="Email Icon" height="80" width="70" />
-							<p>b00099009@aus.edu</p>
-						</div>
-						<div class="contact-item">
-							<img decoding="async" src="https://cdn-icons-png.flaticon.com/512/0/191.png" alt="Phone Icon" height="80" width="70" />
-							<p>+971-56-804-5455</p>
-						</div>
-					</div>
-				</section>
-				<section class="thank-you">
-					<h3>Thank You!</h3>
-					<p>We will get back to you soon...</p>
-				</section>
+{% extends 'layout.html' %} {% block title %}Contact Us | AUS Archive{% endblock %} {% block additional_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+<style>
+	.contact-methods {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+		margin: 2rem 0;
+	}
+
+	.contact-method {
+		flex: 1;
+		min-width: 250px;
+		background-color: white;
+		border-radius: var(--border-radius);
+		padding: 1.5rem;
+		box-shadow: var(--card-shadow);
+		text-align: center;
+		transition: transform 0.3s;
+	}
+
+	.contact-method:hover {
+		transform: translateY(-5px);
+	}
+
+	.contact-icon {
+		width: 80px;
+		height: 80px;
+		border-radius: 50%;
+		background-color: rgba(0, 86, 179, 0.1);
+		color: var(--primary-color);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1rem;
+		font-size: 2rem;
+	}
+
+	.contact-form textarea {
+		min-height: 150px;
+	}
+</style>
+{% endblock %} {% block content %}
+<div class="hero fade-in">
+	<h1><i class="fas fa-envelope"></i> Contact Us</h1>
+	<p>We'd love to hear from you! Reach out with any questions, suggestions, or feedback.</p>
+</div>
+
+<div class="card mb-3">
+	<div class="card-header">
+		<h2><i class="fas fa-comment-dots"></i> Get In Touch</h2>
+	</div>
+	<div class="card-body">
+		<div class="contact-methods">
+			<div class="contact-method">
+				<div class="contact-icon">
+					<i class="fas fa-envelope"></i>
+				</div>
+				<h3>Email Us</h3>
+				<p>Send us an email and we'll get back to you within 24 hours.</p>
+				<a href="mailto:b00099009@aus.edu" class="btn btn-primary mt-4"> b00099009@aus.edu </a>
 			</div>
-			<footer>
-				<p>&copy; 2024 AUS Archive</p>
-				<nav class="compact-nav">
-					<ul>
-						<li><a href="{{ url_for('contact') }}" class="footer-btn">Contact Us</a></li>
-						<li><a href="{{ url_for('about') }}" class="footer-btn">About Us</a></li>
-					</ul>
-				</nav>
-			</footer>
+
+			<div class="contact-method">
+				<div class="contact-icon">
+					<i class="fas fa-phone-alt"></i>
+				</div>
+				<h3>Call Us</h3>
+				<p>Have a quick question? Give us a call during business hours.</p>
+				<a href="tel:+971568045455" class="btn btn-primary mt-4"> +971-56-804-5455 </a>
+			</div>
+
+			<div class="contact-method">
+				<div class="contact-icon">
+					<i class="fas fa-comment-alt"></i>
+				</div>
+				<h3>Feedback</h3>
+				<p>Have suggestions on how we can improve? Let us know.</p>
+				<a href="{{ url_for('main.index') }}#suggestion" class="btn btn-primary mt-4"> Submit Feedback </a>
+			</div>
 		</div>
-	</body>
-</html>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header">
+		<h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+	</div>
+	<div class="card-body">
+		<form action="#" method="post" class="contact-form">
+			<div class="form-group">
+				<label for="name">Your Name</label>
+				<input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required />
+			</div>
+
+			<div class="form-group">
+				<label for="email">Your Email</label>
+				<input type="email" id="email" name="email" class="form-control" placeholder="Enter your email address" required />
+			</div>
+
+			<div class="form-group">
+				<label for="subject">Subject</label>
+				<input type="text" id="subject" name="subject" class="form-control" placeholder="What is this regarding?" />
+			</div>
+
+			<div class="form-group">
+				<label for="message">Message</label>
+				<textarea id="message" name="message" class="form-control" placeholder="How can we help you?" required></textarea>
+			</div>
+
+			<div class="form-group text-center">
+				<button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send Message</button>
+			</div>
+		</form>
+
+		<div class="text-center my-3">
+			<h3>Thank You!</h3>
+			<p>We will get back to you as soon as possible.</p>
+		</div>
+	</div>
+</div>
+{% endblock %}

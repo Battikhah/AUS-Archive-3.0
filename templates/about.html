@@ -1,44 +1,200 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>About Us</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-	</head>
-	<body>
-		<div class="wrapper">
-			<nav>
-				<ul>
-					<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
-					<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
-					<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-				</ul>
-			</nav>
-			<div class="container">
-				<h1>About Us</h1>
-				<section class="about">
-					<h2>Welcome To <span id="W_Name1">AUS Archive</span></h2>
-					<p>
-						<span id="W_Name2">AUS Archive</span> is the place to go to find papers related to your studies quickly. We have a wide range of papers from different courses and
-						years. If you have a document that you want to be shared, you can upload it right away through the upload file page. We're always looking to expand our collection. If
-						you have any questions or concerns, feel free to leave a suggestion. AUS Archive is here to help you with your studies.
-					</p>
-					<p>Your love and support matters a lot.</p>
-					<p style="font-weight: bold; text-align: center">
-						Thank you For Visiting Our Site<br /><br />
-						<span style="color: blue; font-size: 16px; font-weight: bold; text-align: center">Have a great day!</span>
-					</p>
-				</section>
+{% extends 'layout.html' %} {% block title %}About Us | AUS Archive{% endblock %} {% block additional_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+<style>
+	.team-section {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		gap: 2rem;
+		margin: 2rem 0;
+	}
+
+	.team-member {
+		text-align: center;
+		padding: 1.5rem;
+		border-radius: var(--border-radius);
+		background-color: white;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s;
+	}
+
+	.team-member:hover {
+		transform: translateY(-5px);
+	}
+
+	.member-avatar {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		background-color: var(--primary-color);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1rem;
+		color: white;
+		font-size: 2.5rem;
+	}
+
+	.timeline {
+		position: relative;
+		margin: 2rem 0;
+		padding-left: 2rem;
+	}
+
+	.timeline:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 100%;
+		width: 4px;
+		background: var(--primary-color);
+		border-radius: 2px;
+	}
+
+	.timeline-item {
+		position: relative;
+		padding-bottom: 2rem;
+	}
+
+	.timeline-item:before {
+		content: "";
+		position: absolute;
+		left: -2rem;
+		top: 0.5rem;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: white;
+		border: 3px solid var(--primary-color);
+	}
+
+	.timeline-date {
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+		color: var(--primary-color);
+	}
+</style>
+{% endblock %} {% block content %}
+<div class="hero fade-in">
+	<h1><i class="fas fa-info-circle"></i> About AUS Archive</h1>
+	<p>Learn about our mission, our team, and how we're helping students succeed</p>
+</div>
+
+<div class="card mb-3">
+	<div class="card-header">
+		<h2><i class="fas fa-flag"></i> Our Mission</h2>
+	</div>
+	<div class="card-body">
+		<p>
+			AUS Archive is a student-led initiative with a clear mission: to provide a centralized repository of academic resources for students at American University of Sharjah. We
+			believe that knowledge should be shared and accessible to all students.
+		</p>
+
+		<div class="about-section my-3">
+			<div class="feature">
+				<div class="feature-icon">
+					<i class="fas fa-users"></i>
+				</div>
+				<div>
+					<h3>Community Collaboration</h3>
+					<p>We foster a collaborative environment where students can share resources and help each other succeed academically.</p>
+				</div>
 			</div>
-			<footer>
-				<p>&copy; 2024 AUS Archive</p>
-				<nav class="compact-nav">
-					<ul>
-						<li><a href="{{ url_for('contact') }}" class="footer-btn">Contact Us</a></li>
-						<li><a href="{{ url_for('about') }}" class="footer-btn">About Us</a></li>
-					</ul>
-				</nav>
-			</footer>
+
+			<div class="feature">
+				<div class="feature-icon">
+					<i class="fas fa-graduation-cap"></i>
+				</div>
+				<div>
+					<h3>Academic Excellence</h3>
+					<p>Our platform provides access to quality study materials that help students achieve their academic goals and excel in their courses.</p>
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="feature-icon">
+					<i class="fas fa-shield-alt"></i>
+				</div>
+				<div>
+					<h3>Resource Preservation</h3>
+					<p>We preserve valuable academic resources and make them available to future generations of students.</p>
+				</div>
+			</div>
 		</div>
-	</body>
-</html>
+	</div>
+</div>
+
+<div class="card mb-3">
+	<div class="card-header">
+		<h2><i class="fas fa-history"></i> Our Story</h2>
+	</div>
+	<div class="card-body">
+		<div class="timeline">
+			<div class="timeline-item">
+				<div class="timeline-date">2023</div>
+				<div class="timeline-content">
+					<h3>The Beginning</h3>
+					<p>
+						AUS Archive was founded by a group of students who recognized the need for a centralized platform to share academic resources. What started as a small project quickly
+						gained traction among the student body.
+					</p>
+				</div>
+			</div>
+
+			<div class="timeline-item">
+				<div class="timeline-date">2024</div>
+				<div class="timeline-content">
+					<h3>Growth and Development</h3>
+					<p>
+						The platform expanded to include more courses and resource types. We implemented user feedback and improved the user experience, making it easier for students to find
+						and share valuable materials.
+					</p>
+				</div>
+			</div>
+
+			<div class="timeline-item">
+				<div class="timeline-date">2025</div>
+				<div class="timeline-content">
+					<h3>Looking Forward</h3>
+					<p>
+						Our vision for the future includes expanding our resource library, enhancing the platform's features, and exploring new ways to support the academic success of AUS
+						students.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card mb-3">
+	<div class="card-header">
+		<h2><i class="fas fa-hands-helping"></i> How You Can Contribute</h2>
+	</div>
+	<div class="card-body">
+		<p>AUS Archive thrives on community contributions. Here's how you can help:</p>
+
+		<ul>
+			<li><strong>Share Resources:</strong> Upload your class notes, past exams, and study guides to help other students.</li>
+			<li><strong>Provide Feedback:</strong> Help us improve by sharing your suggestions and reporting any issues.</li>
+			<li><strong>Spread the Word:</strong> Tell your classmates about AUS Archive and encourage them to contribute.</li>
+		</ul>
+
+		<div class="text-center my-3">
+			<a href="{{ url_for('files.upload_file') }}" class="btn btn-primary"> <i class="fas fa-upload"></i> Share Your Resources </a>
+		</div>
+	</div>
+</div>
+
+<div class="card">
+	<div class="card-header">
+		<h2><i class="fas fa-envelope"></i> Get in Touch</h2>
+	</div>
+	<div class="card-body">
+		<p>Have questions, suggestions, or feedback? We'd love to hear from you!</p>
+
+		<div class="text-center my-3">
+			<a href="{{ url_for('main.contact') }}" class="btn btn-secondary"> <i class="fas fa-paper-plane"></i> Contact Us </a>
+		</div>
+	</div>
+</div>
+{% endblock %}

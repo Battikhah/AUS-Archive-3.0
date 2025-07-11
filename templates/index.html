@@ -1,50 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta charset="UTF-8" />
-		<title>Home</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2132314938985877" crossorigin="anonymous"></script>
-	</head>
+{% extends 'layout.html' %} {% block title %}Home | AUS Archive{% endblock %} {% block additional_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+{% endblock %} {% block content %}
+<div class="hero fade-in">
+	<h1><i class="fas fa-archive"></i> Welcome to AUS Archive</h1>
+	<p>Your comprehensive resource for AUS academic materials, course papers, exams, and study resources</p>
+</div>
 
-	<body>
-		<div class="wrapper">
-			<nav>
-				<ul>
-					<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
-					<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
-					<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-				</ul>
-			</nav>
-			<div class="container">
-				<h1>Welcome to AUS Archive</h1>
-
-				<!-- Added About section -->
-				<section id="about" class="about">
-					<h2>About</h2>
-					<p>
-						Welcome to AUS Archive, the place to go to find papers related to your studies quickly. We have a wide range of papers from different courses and years. If you have a
-						document that you want to be shared, you can upload it right away through the upload file page. We're always looking to expand our collection. If you have any questions
-						or concerns, feel free to leave a suggestion. AUS Archive is here to help you with your studies.
-					</p>
-				</section>
-
-				<form action="{{ url_for('submit_suggestion') }}" method="post">
-					<h2>Submit a Suggestion:</h2>
-					<input type="text" name="suggestion" id="suggestion" required placeholder="Please leave a suggestion" />
-					<input type="submit" value="Submit" />
-				</form>
+<div class="card mb-3">
+	<div class="card-body">
+		<div class="flex justify-between items-center">
+			<div>
+				<h2><i class="fas fa-bolt"></i> Quick Access</h2>
+				<p>Find what you need or contribute to our growing collection</p>
 			</div>
-			<footer>
-				<p>&copy; 2024 AUS Archive</p>
-				<nav class="compact-nav">
-					<ul>
-						<li><a href="{{ url_for('contact') }}" class="footer-btn">Contact Us</a></li>
-						<li><a href="{{ url_for('about') }}" class="footer-btn">About Us</a></li>
-					</ul>
-				</nav>
-			</footer>
+			<div class="flex gap-2">
+				<a href="{{ url_for('files.search') }}" class="btn btn-primary"> <i class="fas fa-search"></i> Find Resources </a>
+				<a href="{{ url_for('files.upload_file') }}" class="btn btn-secondary"> <i class="fas fa-upload"></i> Upload Files </a>
+			</div>
 		</div>
-	</body>
-</html>
+	</div>
+</div>
+
+<!-- About section -->
+<section class="card mb-3">
+	<div class="card-header">
+		<h2><i class="fas fa-info-circle"></i> About AUS Archive</h2>
+	</div>
+	<div class="card-body">
+		<p class="mb-3">
+			Welcome to AUS Archive, the ultimate platform for finding academic resources related to your studies at American University of Sharjah. Our archive contains a wide range of
+			materials including:
+		</p>
+
+		<div class="about-section">
+			<div class="feature">
+				<div class="feature-icon">
+					<i class="fas fa-file-alt"></i>
+				</div>
+				<div>
+					<h3>Past Exams</h3>
+					<p>Access previous midterms, finals and quizzes to help you prepare for your exams.</p>
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="feature-icon">
+					<i class="fas fa-book"></i>
+				</div>
+				<div>
+					<h3>Course Materials</h3>
+					<p>Find textbooks, lecture notes, and syllabi for various courses across all colleges.</p>
+				</div>
+			</div>
+
+			<div class="feature">
+				<div class="feature-icon">
+					<i class="fas fa-tasks"></i>
+				</div>
+				<div>
+					<h3>Assignments</h3>
+					<p>Review past assignments and solution guides to improve your understanding.</p>
+				</div>
+			</div>
+		</div>
+
+		<p class="mt-4">
+			If you have documents that could help fellow students, we encourage you to upload and share them. Together we can build a comprehensive resource that benefits the entire AUS
+			community.
+		</p>
+	</div>
+</section>
+
+<!-- Suggestion form -->
+<section class="card">
+	<div class="card-header">
+		<h2><i class="fas fa-comment-alt"></i> Submit a Suggestion</h2>
+	</div>
+	<div class="card-body">
+		<form action="{{ url_for('main.submit_suggestion') }}" method="post" class="contact-form">
+			<div class="form-group">
+				<label for="suggestion">What would you like to see improved?</label>
+				<textarea name="suggestion" id="suggestion" class="form-control" rows="3" required placeholder="Please leave a suggestion, feedback, or feature request..."></textarea>
+			</div>
+			<button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit Feedback</button>
+		</form>
+	</div>
+</section>
+{% endblock %} {% block additional_scripts %}
+<script>
+	// Any page-specific JavaScript can go here
+</script>
+{% endblock %}

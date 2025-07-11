@@ -1,338 +1,155 @@
 import os
 import logging
-from flask import Flask, request, redirect, url_for, render_template, send_from_directory, abort, session
+import datetime
+import warnings
+# Suppress the LibreSSL warning that appears on macOS
+warnings.filterwarnings('ignore', message='.*OpenSSL.*LibreSSL.*')
+from flask import Flask, render_template, session, flash, redirect, request
+from flask_session import Session
 from dotenv import load_dotenv
-from googleapiclient.discovery import build
-from google.oauth2 import service_account
-from googleapiclient.http import MediaIoBaseUpload
-from io import BytesIO
 from psycopg2 import pool
-import pathlib
-from google_auth_oauthlib.flow import Flow
-from google.auth.transport import requests
-from google.oauth2 import id_token
-from pip._vendor import cachecontrol
-import google.auth.transport.requests
-import requests
 from db import init_db
 
-app = Flask(__name__)
-
 # Configure logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
+# Load environment variables
 load_dotenv("lock.env")
 
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.secret_key = os.urandom(24)
-
-# GOOGLE DRIVE API VARIABLES
-SCOPES = os.getenv("DRIVE_SCOPES", "").split(",")
-SERVICE_ACCOUNT_FILE = os.getenv("SERVICE_ACCOUNT_FILE")
-PARENT_FOLDER_ID = os.getenv("PARENT_FOLDER_ID")
-
-# GOOGLE LOG IN VARIABLES
-######
-os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-######
-
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-client_secrets_file = os.path.join(pathlib.Path(__file__).parent, "client_secret.json")
-flow = Flow.from_client_secrets_file(
-    client_secrets_file=client_secrets_file,
-    scopes=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email", "openid"],
-    redirect_uri="http://127.0.0.1:5000/callback"
-    #redirect_uri="https://ausarchive.vercel.app/callback"
-)
-
-def login_is_required(function):
-    def wrapper(*args, **kwargs):
-        if "google_id" not in session:
-            return redirect(url_for("login"))
-        else:
-            return function()
-    return wrapper
-
-@app.route("/login")
-def login():
-    logging.debug("Login route accessed")
-    authorization_url, state = flow.authorization_url()
-    session["state"] = state
-    return redirect(authorization_url)
-
-
-@app.route("/callback")
-def callback():
-    logging.debug("Callback route accessed")
-    try:
-        # Ensure 'state' exists in the session
-        if not session["state"] == request.args.get("state"):
-            # If 'state' does not match or is missing, handle the error
-            logging.error("State mismatch or missing in session.")
-            abort(500)  # Or redirect to an error handling route/page
-    except KeyError:
-        # Handle the case where 'state' is not in the session at all
-        logging.error("'state' key not found in session.")
-        abort(500)  # Or redirect to an error handling route/page
+def create_app():
+    """Create and configure the Flask application"""
+    app = Flask(__name__)
     
-    flow.fetch_token(authorization_response=request.url)
+    # Configure app
+    app.config['UPLOAD_FOLDER'] = 'uploads'
+    
+    # Always use string secret key for Flask-Session
+    secret_key = os.environ.get('SECRET_KEY')
+    if not secret_key:
+        # Use a simple string secret key for development
+        secret_key = 'development-secret-key-for-aus-archive'
+    
+    # Ensure secret key is a string and not bytes
+    if isinstance(secret_key, bytes):
+        secret_key = secret_key.decode('utf-8')
+    
+    app.secret_key = secret_key
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # Limit uploads to 16MB
 
-    if not session["state"] == request.args["state"]:
-        logging.error("State does not match!")
-        abort(500)  # State does not match!
+    # Create session directory if it doesn't exist (for potential future use)
+    session_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'flask_session')
+    os.makedirs(session_dir, exist_ok=True)
+    
+    # Try minimal Flask-Session configuration to fix OAuth session issues
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SESSION_FILE_DIR'] = session_dir
+    app.config['SESSION_PERMANENT'] = False
+    app.config['SESSION_USE_SIGNER'] = False
+    app.config['SESSION_KEY_PREFIX'] = ''
+    
+    # Initialize Flask-Session
+    Session(app)
+    
+    # For Google authentication
+    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+    
+    # Register app context data
+    @app.context_processor
+    def inject_context():
+        """Inject common variables into template context"""
+        return {
+            'current_year': datetime.datetime.now().year
+        }
+    
+    # Register error handlers
+    @app.errorhandler(404)
+    def page_not_found(e):
+        """Handle 404 errors"""
+        return render_template('errors/404.html'), 404
 
-    credentials = flow.credentials
-    request_session = requests.session()
-    cached_session = cachecontrol.CacheControl(request_session)
-    token_request = google.auth.transport.requests.Request(session=cached_session)
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        """Handle 500 errors"""
+        return render_template('errors/500.html'), 500
 
-    id_info = id_token.verify_oauth2_token(
-        id_token=credentials._id_token,
-        request=token_request,
-        audience=GOOGLE_CLIENT_ID
-    )
-
-    session["google_id"] = id_info.get("sub")
-    session["name"] = id_info.get("name")
-    session["email"] = id_info.get("email")
-    return redirect(url_for("upload_file"))
-
-# NEON (Postgres) SIDE VARIABLES
+    @app.errorhandler(403)
+    def forbidden(e):
+        """Handle 403 errors"""
+        # Log more details about what caused the 403
+        logger.error(f"403 Forbidden error: {e}")
+        logger.error(f"Request URL: {request.url}")
+        logger.error(f"Request method: {request.method}")
+        logger.error(f"Request headers: {dict(request.headers)}")
+        logger.error(f"Session data: {dict(session)}")
+        return render_template('errors/403.html'), 403
+    
+    # Process flash messages and log session info
+    @app.before_request
+    def process_flash_messages():
+        """Process flash messages stored in session and log session info for debugging"""
+        try:
+            # Log session info for debugging (only for specific routes)
+            debug_routes = ['/upload', '/auth/login', '/auth/callback']
+            if any(route in request.path for route in debug_routes):
+                google_id = session.get('google_id', 'None')
+                if google_id and not isinstance(google_id, str):
+                    google_id = str(google_id)
+                logger.info(f"Session for {request.path}: google_id={google_id[:5] if google_id and google_id != 'None' else 'None'}..., "
+                           f"name={session.get('name', 'None')}, "
+                           f"email={session.get('email', 'None')}")
+            
+            if session and 'flash_message' in session and 'flash_category' in session:
+                flash(session.pop('flash_message'), session.pop('flash_category'))
+        except Exception as e:
+            # Log the error but don't fail the request
+            logger.error(f"Error processing flash messages: {e}")
+    
+    # Register blueprints
+    from blueprints.main import main_bp
+    from blueprints.auth import auth_bp
+    from blueprints.files import files_bp
+    from blueprints.admin import admin_bp
+    from blueprints.analytics import analytics_bp
+    from blueprints.api import api_bp
+    
+    app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+    app.register_blueprint(files_bp)
+    app.register_blueprint(admin_bp)
+    app.register_blueprint(analytics_bp, url_prefix='/analytics')
+    app.register_blueprint(api_bp, url_prefix='/api')
+    
+    # Handle legacy callback URL for backward compatibility
+    @app.route("/callback")
+    def legacy_callback():
+        """Redirect legacy callback URL to the new blueprint path"""
+        return redirect('/auth/callback' + ('?' + request.query_string.decode() if request.query_string else ''))
+    
+    return app
+# Create database connection pool
 CONNECTION_STRING = os.getenv('DATABASE_URL')
-CONNECTION_POOL = pool.SimpleConnectionPool(1, 250, CONNECTION_STRING)
-if CONNECTION_POOL:
-    print('Connection pool created successfully')
+try:
+    CONNECTION_POOL = pool.SimpleConnectionPool(1, 250, CONNECTION_STRING)
+    logger.info('Connection pool created successfully')
+except Exception as e:
+    logger.error(f"Error creating connection pool: {e}")
+    CONNECTION_POOL = None
 
-# GOOGLE DRIVE API SIDE
-def authenticate():
-    creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-    return creds
+# Application factory pattern
+app = create_app()
 
-def google_upload(file, file_name):
-    logging.debug("Authenticating for Google Drive API")
-    creds = authenticate()
-    service = build('drive', 'v3', credentials=creds)
-
-    file_metadata = {
-        'name': file_name,
-        'parents': [PARENT_FOLDER_ID]
-    }
-    
-    media = MediaIoBaseUpload(BytesIO(file.read()), mimetype='application/octet-stream', resumable=True)
-    file.seek(0)
-    
-    try:
-        logging.debug("Uploading file to Google Drive")
-        file = service.files().create(body=file_metadata, media_body=media, fields='id').execute()
-        logging.debug('File ID: %s', file.get('id'))
-        return file.get('id')
-    except google.auth.exceptions.RefreshError as e:
-        logging.error("RefreshError during file upload: %s", e)
-        raise
-    except Exception as e:
-        logging.error("An error occurred during file upload: %s", e)
-        raise
-
-def google_retrieve_links(file_id):
-    creds = authenticate()
-    service = build('drive', 'v3', credentials=creds)
-
-    file = service.files().get(fileId=file_id, fields='webViewLink').execute()
-    link = file.get('webViewLink')
-    return link
-
-# ROUTES
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/upload', methods=['GET', 'POST'])
-def upload_file():
-    logging.debug("Upload file route accessed")
-    if not session.get('google_id'):
-        logging.debug("User not logged in, redirecting to login page")
-        return redirect(url_for('login_page'))
-    else:
-        if request.method == 'POST':
-            logging.debug("Processing file upload")
-            course = request.form['course']
-            profs = ', '.join(request.form.getlist('profs'))
-            file_type = request.form['file_type']
-            year = request.form['year']
-            semester = request.form['semester']
-            file = request.files['file']
-            filename = f"{course[:7]}-{file_type}-{profs}-{semester}-{year}{os.path.splitext(file.filename)[1]}"
-            user_email = session.get("email")
-            
-            file_ID = google_upload(file, filename)
-            file_link = google_retrieve_links(file_ID)
-            
-            with CONNECTION_POOL.getconn() as conn:
-                cursor = conn.cursor()
-                cursor.execute('''
-                    INSERT INTO files (filename, course, profs, year, semester, file_type, file_ID, file_link, uploaded_by) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-                ''', (filename, course, profs, year, semester, file_type, file_ID, file_link, user_email))
-                conn.commit()
-            
-            return redirect(url_for('index'))
-        
-        courses = get_unique_values('courses')
-        professors = get_unique_values('professors')
-        semesters = get_unique_values('semesters')
-        file_types = get_unique_values('file_types')
-        return render_template('upload.html', courses=courses, professors=professors, semesters=semesters, file_types=file_types)
-
-@app.route('/search', methods=['GET', 'POST'])
-def search():
-    files = []
-    if request.method == 'POST':
-        course = request.form.get('course', '')
-        profs = request.form.getlist('prof')
-        file_type = request.form.get('file_type', '')
-        year = request.form.get('year', '')
-        semester = request.form.get('semester', '')
-
-        query = "SELECT *, file_link FROM files WHERE 1=1"
-        search_values = []
-        
-        if course:
-            query += ' AND course=%s'
-            search_values.append(course)
-        if profs:
-            query += ' AND (' + ' OR '.join(['profs LIKE %s'] * len(profs)) + ')'
-            search_values.extend([f"%{prof}%" for prof in profs])
-        if year:
-            query += ' AND year=%s'
-            search_values.append(year)
-        if semester:
-            query += ' AND semester=%s'
-            search_values.append(semester)
-        if file_type:
-            query += ' AND file_type=%s'
-            search_values.append(file_type)
-
-        with CONNECTION_POOL.getconn() as conn:
-            cursor = conn.cursor()
-            cursor.execute(query, search_values)
-            files = cursor.fetchall()
-    
-    courses = get_unique_values('courses')
-    professors = get_unique_values('professors')
-    semesters = get_unique_values('semesters')
-    file_types = get_unique_values('file_types')
-    return render_template('search.html', courses=courses, professors=professors, semesters=semesters, files=files, file_types=file_types)
-
-
-    files_by_course = {}
-    with CONNECTION_POOL.getconn() as conn:
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM files')
-        files = cursor.fetchall()
-        
-        for file in files:
-            course = file[2]
-            if course not in files_by_course:
-                files_by_course[course] = []
-            files_by_course[course].append(file)
-
-    return render_template('view_by_course.html', files_by_course=files_by_course)
-
-@app.route('/report_file', methods=['POST'])
-def report_file():
-    file_id = request.form.get('file_id')
-    with CONNECTION_POOL.getconn() as conn:
-        cursor = conn.cursor()
-        cursor.execute('UPDATE files SET reported=TRUE WHERE id=%s', (file_id,))
-        conn.commit()
-    return redirect(url_for('search'))
-
-@app.route('/admin_login', methods=['GET', 'POST'])
-def admin_login():
-    if request.method == 'POST':
-        password = request.form.get('password')
-        if password == os.getenv('ADMIN_PASSWORD'):
-            session['admin_logged_in'] = True
-            return redirect(url_for('admin'))
-        else:
-            abort(401)
-    else:
-        return render_template('admin_login.html')
-
-@app.route('/admin', methods=['GET', 'POST'])
-def admin():
-    if not session.get('admin_logged_in'):
-        return redirect(url_for('admin_login'))
-
-    course = request.form.get('course')
-    prof = request.form.get('prof')
-    semester = request.form.get('semester')
-    suggestion = request.form.get('suggestion')
-    
-    with CONNECTION_POOL.getconn() as conn:
-        cursor = conn.cursor()
-        if course:
-            cursor.execute('INSERT INTO courses (name) VALUES (%s)', (course,))
-        if prof:
-            cursor.execute('INSERT INTO professors (name) VALUES (%s)', (prof,))
-        if semester:
-            cursor.execute('INSERT INTO semesters (name) VALUES (%s)', (semester,))
-        if suggestion:
-            cursor.execute('INSERT INTO suggestions (suggestion) VALUES (%s)', (suggestion,))
-        conn.commit()
-
-    courses = get_unique_values('courses')
-    professors = get_unique_values('professors')
-    semesters = get_unique_values('semesters')
-    suggestions = get_all_suggestions()
-    return render_template('admin.html', courses=courses, professors=professors, semesters=semesters, suggestions=suggestions)
-
-
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-@app.route('/submit_suggestion', methods=['POST'])
-def submit_suggestion():
-    suggestion = request.form.get('suggestion')
-    if suggestion:
-        with CONNECTION_POOL.getconn() as conn:
-            cursor = conn.cursor()
-            cursor.execute('INSERT INTO suggestions (suggestion) VALUES (%s)', (suggestion,))
-            conn.commit()
-    return redirect(url_for('index'))
-
-def get_unique_values(table):
-    with CONNECTION_POOL.getconn() as conn:
-        cursor = conn.cursor()
-        query = f'SELECT name FROM {table}'
-        cursor.execute(query)
-        values = [row[0] for row in cursor.fetchall()]
-    return values
-
-def get_all_suggestions():
-    with CONNECTION_POOL.getconn() as conn:
-        cursor = conn.cursor()
-        cursor.execute('SELECT suggestion FROM suggestions')
-        suggestions = [row[0] for row in cursor.fetchall()]
-    return suggestions
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-@app.route('/login_page', methods=['GET'])
-def login_page():
-    return render_template("login.html")
-
-@app.route('/ads.txt')
-def ads():
-    return render_template('ads.txt')
+# Make connection pool available to application context
+app.config['CONNECTION_POOL'] = CONNECTION_POOL
 
 if __name__ == '__main__':
-    print("Starting Flask app")
-    init_db(CONNECTION_POOL=CONNECTION_POOL)
-    logging.debug("Starting Flask app")
+    logger.info("Starting Flask app")
+    if CONNECTION_POOL:
+        init_db(CONNECTION_POOL=CONNECTION_POOL)
+    else:
+        logger.error("Cannot initialize database: connection pool not available")
+    
     app.run(debug=True)

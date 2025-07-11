@@ -1,4 +1,132 @@
-demos/
-venv/
-__pycache__/
+# Environment and Configuration Files
 lock.env
+.env
+.env.local
+.env.production
+.env.development
+*.env
+
+# Google OAuth and Service Account Keys
+client_secret.json
+AUS-ARCHIVER.json
+service-account*.json
+*-service-account.json
+credentials.json
+token.json
+
+# Database Configuration
+database.ini
+db_config.py
+config.ini
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+.env/
+
+# Flask
+instance/
+.webassets-cache
+flask_session/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Demo and Test Files
+demos/
+test_*.py
+*_test.py
+tests/
+testing/
+temp_*.py
+debug_*.py
+scratch_*.py
+
+# Upload directories (if containing sensitive files)
+uploads/
+files/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# SSL Certificates
+*.pem
+*.key
+*.crt
+*.cert
+
+# Local development files
+local_*
+dev_*
+development_*

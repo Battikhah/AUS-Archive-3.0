@@ -1,115 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<meta charset="UTF-8" />
-		<title>Search Files</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2132314938985877" crossorigin="anonymous"></script>
-		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-		<script>
-			$(document).ready(function () {
-				$("#course").select2();
-				$("#profs").select2({
-					placeholder: "Select Professors",
-					allowClear: true,
-					// This option ensures the disabled placeholder option doesn't get selected
-					templateSelection: function (data, container) {
-						if (data.id === "") {
-							return "Select Professors";
-						}
-						return data.text;
-					},
-				});
-				$("#file_type").select2();
-				$("#semester").select2();
-			});
-		</script>
-	</head>
+{% extends 'layout.html' %} {% block title %}Search Files | AUS Archive{% endblock %} {% block additional_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" />
+{% endblock %} {% block content %}
+<h1><i class="fas fa-search"></i> Search Files</h1>
 
-	<body>
-		<nav>
-			<ul>
-				<li><a href="{{ url_for('index') }}" class="footer-btn">Home</a></li>
-				<li><a href="{{ url_for('upload_file') }}" class="footer-btn">Upload File</a></li>
-				<li><a href="{{ url_for('search') }}" class="footer-btn">Search Files</a></li>
-			</ul>
-		</nav>
-		<div class="container">
-			<h1>Search Files</h1>
-			<form action="{{ url_for('search') }}" method="post">
-				<label for="course">Course:</label>
-				<select name="course" id="course">
-					<option value="" disabled selected>Select the Course</option>
-					{% for course in courses %}
-					<option value="{{ course }}">{{ course }}</option>
-					{% endfor %}</select
-				><br />
+<div class="card search-filters">
+	<div class="card-header">
+		<h2>Search Filters</h2>
+	</div>
+	<div class="card-body">
+		<form action="{{ url_for('files.search') }}" method="post" id="searchForm">
+			<div class="filters-grid">
+				<div class="form-group">
+					<label for="course">Course:</label>
+					<select name="course" id="course" class="form-control" data-placeholder="Select a course">
+						<option value=""></option>
+						{% for course in courses %}
+						<option value="{{ course }}">{{ course }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-				<label for="prof">Professors:</label>
-				<select name="profs" id="profs" multiple>
-					<option value="" disabled>Select the Professor(s)</option>
-					{% for professor in professors %}
-					<option value="{{ professor }}">{{ professor }}</option>
-					{% endfor %}</select
-				><br />
+				<div class="form-group">
+					<label for="prof">Professors:</label>
+					<select name="prof" id="prof" class="form-control" multiple data-placeholder="Select professor(s)">
+						{% for professor in professors %}
+						<option value="{{ professor }}">{{ professor }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-				<label for="file_type">File Type:</label>
-				<select name="file_type" id="file_type">
-					<option value="" disabled selected>Select the Type of Document</option>
-					{% for file_type in file_types %}
-					<option value="{{ file_type }}">{{ file_type }}</option>
-					{% endfor %}</select
-				><br />
+				<div class="form-group">
+					<label for="file_type">File Type:</label>
+					<select name="file_type" id="file_type" class="form-control" data-placeholder="Select file type">
+						<option value=""></option>
+						{% for file_type in file_types %}
+						<option value="{{ file_type }}">{{ file_type }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-				<label for="year">Year:</label>
-				<input type="number" name="year" id="year" min="2000" max="2100" /><br />
+				<div class="form-group">
+					<label for="year">Year:</label>
+					<input type="number" name="year" id="year" class="form-control" min="2000" max="2100" placeholder="Year (e.g., 2023)" />
+				</div>
 
-				<label for="semester">Semester:</label>
-				<select name="semester" id="semester">
-					<option value="" disabled selected>Select the Semester</option>
-					{% for semester in semesters %}
-					<option value="{{ semester }}">{{ semester }}</option>
-					{% endfor %}</select
-				><br />
+				<div class="form-group">
+					<label for="semester">Semester:</label>
+					<select name="semester" id="semester" class="form-control" data-placeholder="Select semester">
+						<option value=""></option>
+						{% for semester in semesters %}
+						<option value="{{ semester }}">{{ semester }}</option>
+						{% endfor %}
+					</select>
+				</div>
 
-				<input type="submit" value="Search" />
-			</form>
+				<div class="form-group" style="display: flex; align-items: flex-end">
+					<button type="submit" class="btn btn-primary" style="width: 100%"><i class="fas fa-search"></i> Search Files</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 
-			{% if files %}
-			<h2>Search Results</h2>
-			<table>
+{% if files %}
+<div class="card">
+	<div class="card-header">
+		<h2><i class="fas fa-file-alt"></i> Search Results <span class="badge">{{ files|length }} files found</span></h2>
+	</div>
+	<div class="card-body">
+		<div class="table-container">
+			<table class="table-responsive">
 				<thead>
 					<tr>
-						<th>File</th>
+						<th>File Name</th>
+						<th>Course</th>
 						<th>Professors</th>
 						<th>File Type</th>
 						<th>Year</th>
 						<th>Semester</th>
-						<th>Action</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for file in files %}
-					<!-- Table row with report button -->
 					<tr>
 						<td>
-							<a href="https://drive.google.com/uc?export=download&id={{ file[7] }}">{{ file[1] }}</a>
+							<a href="{{ file[8] }}" target="_blank" title="View file"> <i class="fas fa-file-pdf"></i> {{ file[1]|truncate(30) }} </a>
 						</td>
+						<td>{{ file[2] }}</td>
 						<td>{{ file[3] }}</td>
 						<td>{{ file[6] }}</td>
 						<td>{{ file[4] }}</td>
 						<td>{{ file[5] }}</td>
-						<td style="text-align: center">
-							<div style="width: 100%; text-align: center">
-								<form action="{{ url_for('report_file') }}" method="post">
+						<td>
+							<div class="table-actions">
+								<a href="https://drive.google.com/uc?export=download&id={{ file[7] }}" class="btn btn-primary btn-sm" title="Download file">
+									<i class="fas fa-download"></i>
+								</a>
+								<form action="{{ url_for('main.report_file') }}" method="post" style="display: inline">
 									<input type="hidden" name="file_id" value="{{ file[0] }}" />
 									{% if file[10] %}
-									<input type="submit" value="Reported" disabled style="background-color: #bdbdbd; margin: 0 auto; display: block" />
+									<button type="button" class="btn btn-disabled btn-sm" disabled title="Already reported">
+										<i class="fas fa-flag"></i>
+									</button>
 									{% else %}
-									<input type="submit" value="Report" style="margin: 0 auto; display: block" />
+									<button type="submit" class="btn btn-danger btn-sm" title="Report this file">
+										<i class="fas fa-flag"></i>
+									</button>
 									{% endif %}
 								</form>
 							</div>
@@ -118,16 +115,31 @@
 					{% endfor %}
 				</tbody>
 			</table>
-			{% endif %}
 		</div>
-		<footer>
-			<p>&copy; 2024 AUS Archive</p>
-			<nav class="compact-nav">
-				<ul>
-					<li><a href="{{ url_for('contact') }}" class="footer-btn">Contact Us</a></li>
-					<li><a href="{{ url_for('about') }}" class="footer-btn">About Us</a></li>
-				</ul>
-			</nav>
-		</footer>
-	</body>
-</html>
+	</div>
+</div>
+{% elif request.method == 'POST' %}
+<div class="card">
+	<div class="card-body">
+		<div class="text-center my-3">
+			<i class="fas fa-search fa-3x" style="color: #ccc"></i>
+			<h3>No Results Found</h3>
+			<p>Try adjusting your search filters to find what you're looking for.</p>
+		</div>
+	</div>
+</div>
+{% endif %} {% endblock %} {% block additional_scripts %}
+<script>
+	$(document).ready(function () {
+		// Clear empty fields before form submission
+		$("#searchForm").on("submit", function () {
+			$("select, input").each(function () {
+				if ($(this).val() === "" || $(this).val() === null) {
+					$(this).prop("disabled", true);
+				}
+			});
+			return true;
+		});
+	});
+</script>
+{% endblock %}
