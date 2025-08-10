@@ -145,4 +145,4 @@ _Login with your @aus.edu account and start exploring!_
 - 📧 Contact us through the platform
 - 🐛 Report issues via the feedback system
 
-**Built with ❤️ by AUS students, for AUS students**
+**Built with ❤️ by an AUS student, for AUS students**
